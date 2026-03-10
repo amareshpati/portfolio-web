@@ -48,8 +48,8 @@ const EmailContainer = styled.div`
   max-width: 600px;
   display: flex;
   flex-direction: column;
-  background-color: rgba(17, 25, 40, 0.83);
-  border: 1px solid rgba(255, 255, 255, 0.125);
+  background-color: ${({ theme }) => theme.card};
+  border: 1px solid ${({ theme }) => theme.primary + 80};
   padding: 32px;
   border-radius: 12px;
   box-shadow: rgba(23, 92, 230, 0.1) 0px 4px 24px;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { VerticalTimelineElement } from "react-vertical-timeline-component";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 
 const Top = styled.div`
   width: 100%;
@@ -104,7 +104,7 @@ const ButtonWrapper = styled.div`
 
 const ExperienceCard = ({ experience }) => {
   const [showMore, setShowMore] = useState(false);
-
+  const theme = useTheme();
   return (
     <VerticalTimelineElement
       icon={
@@ -120,15 +120,15 @@ const ExperienceCard = ({ experience }) => {
         display: "flex",
         flexDirection: "column",
         gap: "12px",
-        background: "#1d1836",
-        color: "#fff",
+        background: theme.card,
+        color: theme.text_primary,
         boxShadow: "rgba(23, 92, 230, 0.15) 0px 4px 24px",
-        backgroundColor: "rgba(17, 25, 40, 0.83)",
-        border: "1px solid rgba(255, 255, 255, 0.125)",
+        backgroundColor: theme.card,
+        border: `1px solid ${theme.primary + 80}`,
         borderRadius: "6px",
       }}
       contentArrowStyle={{
-        borderRight: "7px solid rgba(255, 255, 255, 0.3)",
+        borderRight: `7px solid ${theme.card}`,
       }}
       date={experience?.date}
     >
