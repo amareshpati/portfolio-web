@@ -214,7 +214,9 @@ export const projects = [
     tags: ["React Native", "Insurance", "Notifications", "iOS", "Android"],
     category: "Mobile app",
     github: "",
-    webapp: "https://play.google.com/store/apps/details?id=com.coversure",
+    webapp: "",
+    playStore: "https://play.google.com/store/apps/details?id=com.coversure&pcampaignid=web_share",
+    appStore: "https://apps.apple.com/in/app/coversure-insurance-made-easy/id6454847100",
     overview: "All-in-one insurance app: manage policies, get renewal alerts, access assistance, and understand coverage.",
     pinned: true,
     member: [{ name: "", img: "", linkedin: "", github: "" }]
@@ -250,9 +252,71 @@ export const projects = [
     tags: ["React Native", "Live Results", "Sports", "Push Notifications"],
     category: "Mobile app",
     github: "",
-    webapp: "https://play.google.com/store/apps/details?id=com.europeanathletics.mobile",
+    webapp: "",
+    playStore: "https://play.google.com/store/apps/details?id=com.europeanathletics.mobile&pcampaignid=web_share",
+    appStore: "https://apps.apple.com/in/app/european-athletics/id6477942665",
     overview: "Official European Athletics app delivering live results, schedules, and athlete insights with interactive fan features.",
     pinned: true,
+    member: [{ name: "", img: "", linkedin: "", github: "" }]
+  },
+
+  {
+    id: 18,
+    title: "Mo Ambulance – Emergency Booking",
+    description: [
+      "Ambulance booking app for quick emergency medical response.",
+      "Developed for Clinohealth Innovation, reducing emergency response times by 20%.",
+      "Real-time tracking and booking features for seamless ambulance dispatch."
+    ],
+    image: "https://img.freepik.com/free-vector/app-development-banner_33099-1720.jpg",
+    tags: ["React Native", "Emergency", "Healthcare", "Android"],
+    category: "Mobile app",
+    github: "",
+    webapp: "",
+    playStore: "https://play.google.com/store/apps/details?id=com.moambulance&pcampaignid=web_share",
+    appStore: "",
+    overview: "Emergency ambulance booking app with real-time tracking for faster medical response.",
+    member: [{ name: "", img: "", linkedin: "", github: "" }]
+  },
+
+  {
+    id: 19,
+    title: "Ask Hitech – Expert Q&A",
+    description: [
+      "Expert consultation and Q&A platform connecting users with tech professionals.",
+      "Built for iOS with a clean, intuitive interface for asking and answering queries.",
+      "Enables knowledge sharing between professionals and users in real time."
+    ],
+    image: "https://img.freepik.com/free-vector/app-development-banner_33099-1720.jpg",
+    tags: ["React Native", "iOS", "Q&A", "Consultation"],
+    category: "Mobile app",
+    github: "",
+    webapp: "",
+    playStore: "",
+    appStore: "https://apps.apple.com/in/app/ask-hitech/id1660576445",
+    overview: "iOS app for expert consultations and tech Q&A, connecting professionals with users in real time.",
+    member: [{ name: "", img: "", linkedin: "", github: "" }]
+  },
+
+  {
+    id: 20,
+    title: "AI Mail Bot",
+    description: [
+      "A smart tool to generate and auto-send personalized emails to recruiters using AI.",
+      "Powered by Google Gemini API for intelligent email generation tailored per recipient.",
+      "Upload a CSV with recruiter details and your resume — the bot drafts, queues, and sends emails automatically.",
+      "Web interface lets you review, edit, and approve emails before dispatching.",
+      "Built with TypeScript and HTML; supports daily sending limits and scheduling."
+    ],
+    image: "https://img.freepik.com/free-vector/hand-drawn-web-developers_23-2148819604.jpg?semt=ais_hybrid",
+    tags: ["TypeScript", "Node.js", "Gemini AI", "Automation", "Email"],
+    category: "web app",
+    github: "https://github.com/amareshpati/ai-mail-bot",
+    webapp: "",
+    playStore: "",
+    appStore: "",
+    overview: "AI-powered email bot that generates and auto-sends personalized recruiter outreach emails using Gemini API.",
+    pinned: false,
     member: [{ name: "", img: "", linkedin: "", github: "" }]
   },
 

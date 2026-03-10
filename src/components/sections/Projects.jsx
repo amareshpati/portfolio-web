@@ -132,11 +132,11 @@ const ToggleSwitch = styled.input`
 `;
 
 const CardContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
   gap: 28px;
-  flex-wrap: wrap;
+  width: 100%;
+  align-items: stretch;
 `;
 
 const SectionLabel = styled.div`
