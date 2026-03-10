@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Link as LinkR } from "react-router-dom";
-import styled, { useTheme } from "styled-components";
+import styled, { useTheme, keyframes } from "styled-components";
 import { Bio } from "../data/constants";
 import { MenuRounded } from "@mui/icons-material";
+import { useThemeToggle } from "../utils/ThemeContext";
 
 const Nav = styled.div`
   background-color: ${({ theme }) => theme.bg};
@@ -91,6 +92,39 @@ const GithubButton = styled.a`
   }
 `;
 
+const spinOnce = keyframes`
+  from { transform: rotate(0deg) scale(1); }
+  50%  { transform: rotate(180deg) scale(1.2); }
+  to   { transform: rotate(360deg) scale(1); }
+`;
+
+const ThemeToggleBtn = styled.button`
+  background: none;
+  border: 1px solid ${({ theme }) => theme.text_secondary};
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  color: ${({ theme }) => theme.text_primary};
+  transition: border-color 0.3s ease, color 0.3s ease;
+  flex-shrink: 0;
+  overflow: hidden;
+  &:hover {
+    border-color: ${({ theme }) => theme.primary};
+    color: ${({ theme }) => theme.primary};
+  }
+`;
+
+const IconSpan = styled.span`
+  display: inline-flex;
+  animation: ${({ $spinning }) => ($spinning ? spinOnce : "none")} 0.5s ease forwards;
+  line-height: 1;
+`;
+
 const MobileIcon = styled.div`
   height: 100%;
   display: flex;
@@ -128,7 +162,17 @@ const MobileMenu = styled.ul`
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [spinning, setSpinning] = useState(false);
   const theme = useTheme();
+  const { isDark, toggleTheme } = useThemeToggle();
+
+  const handleToggle = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = Math.round(rect.left + rect.width / 2);
+    const y = Math.round(rect.top + rect.height / 2);
+    toggleTheme(x, y);
+    setSpinning(true);
+  };
   return (
     <Nav>
       <NavbarContainer>
@@ -177,7 +221,15 @@ const Navbar = () => {
         )}
 
         <ButtonContainer>
-          <GithubButton href={Bio.github} target="_Blank">
+          <ThemeToggleBtn onClick={handleToggle} title="Toggle theme">
+            <IconSpan
+              $spinning={spinning}
+              onAnimationEnd={() => setSpinning(false)}
+            >
+              {isDark ? "☀️" : "🌙"}
+            </IconSpan>
+          </ThemeToggleBtn>
+          <GithubButton href={Bio.github} target="_Blank" style={{ marginLeft: "12px" }}>
             Github Profile
           </GithubButton>
         </ButtonContainer>
