@@ -57,39 +57,105 @@ const ToggleButtonGroup = styled.div`
   font-size: 16px;
   border-radius: 12px;
   font-weight: 500;
-  margin: 22px 0;
+  margin: 0;
+  overflow: hidden; /* Clips the child buttons to perfectly match the rounded corners */
   @media (max-width: 768px) {
-    font-size: 12px;
+    font-size: 13px;
+    border-radius: 8px;
+    width: 100%;
+    overflow-x: auto;
+    /* Hide scrollbar for a clean UI on mobile */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 `;
 
+const CountBadge = styled.span`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  background: ${({ theme }) => theme.primary + 25};
+  color: ${({ theme }) => theme.primary};
+  line-height: 1;
+  transition: all 0.3s ease;
+`;
+
 const ToggleButton = styled.div`
-  padding: 8px 18px;
-  border-radius: 6px;
+  padding: 8px 16px;
   cursor: pointer;
-  &:hover {
-    background: ${({ theme }) => theme.primary + 20};
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 80px;
+  justify-content: center;
+  white-space: nowrap;
+  transition: background 0.25s ease, color 0.25s ease;
+  
+  /* Separator: use left border on all but the first child
+     to avoid any border on the very last element edge */
+  &:not(:first-child) {
+    border-left: 1.5px solid ${({ theme }) => theme.primary};
   }
+
+  /* Hover: only on real pointer devices (never sticks on touch) */
+  @media (hover: hover) and (pointer: fine) {
+    &:hover:not([data-active="true"]) {
+      background: ${({ theme }) => theme.primary + 20};
+    }
+  }
+
+  /* Active press feedback for touch devices */
+  &:active {
+    background: ${({ theme }) => theme.primary + 30};
+  }
+
   @media (max-width: 768px) {
-    padding: 6px 8px;
-    border-radius: 4px;
+    padding: 8px 12px;
+    min-width: 62px;
+    font-size: 13px;
   }
   ${({ active, theme }) =>
     active &&
     `
-    background: ${theme.primary + 20};
+    background: ${theme.primary};
+    color: ${theme.white};
+    
+    ${CountBadge} {
+      background: ${theme.white};
+      color: ${theme.primary};
+    }
   `}
-`;
-
-const Divider = styled.div`
-  width: 1.5px;
-  background: ${({ theme }) => theme.primary};
 `;
 
 const ToggleSwitchContainer = styled.div`
   display: flex;
   align-items: center;
-  margin: 12px 0;
+  gap: 8px;
+`;
+
+const FiltersRow = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 22px 0 32px;
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 12px;
+    margin: 16px 0 24px;
+  }
 `;
 
 const ToggleSwitchLabel = styled.label`
@@ -231,32 +297,31 @@ const Projects = () => {
           apps. Here are some of my projects.
         </Desc>
 
-        <ToggleButtonGroup>
-          <ToggleButton active={toggle === "all"} onClick={() => setToggle("all")}>
-            ALL{projectCount()}
-          </ToggleButton>
-          <Divider />
-          <ToggleButton active={toggle === "Mobile app"} onClick={() => setToggle("Mobile app")}>
-            Mobile App{projectCount("Mobile app")}
-          </ToggleButton>
-          <Divider />
-          <ToggleButton active={toggle === "web app"} onClick={() => setToggle("web app")}>
-            Web App{projectCount("web app")}
-          </ToggleButton>
-          <Divider />
-          <ToggleButton active={toggle === "backend"} onClick={() => setToggle("backend")}>
-            Backend{projectCount("backend")}
-          </ToggleButton>
-        </ToggleButtonGroup>
+        <FiltersRow>
+          <ToggleButtonGroup>
+            <ToggleButton active={toggle === "all"} onClick={() => setToggle("all")}>
+              ALL <CountBadge>{(sourceFilter ? projects.filter(p => p.github) : projects).length}</CountBadge>
+            </ToggleButton>
+            <ToggleButton active={toggle === "Mobile app"} onClick={() => setToggle("Mobile app")}>
+              Mobile <CountBadge>{projects.filter(p => sourceFilter ? (p.github && p.category.includes("Mobile app")) : p.category.includes("Mobile app")).length}</CountBadge>
+            </ToggleButton>
+            <ToggleButton active={toggle === "web app"} onClick={() => setToggle("web app")}>
+              Web <CountBadge>{projects.filter(p => sourceFilter ? (p.github && p.category.includes("web app")) : p.category.includes("web app")).length}</CountBadge>
+            </ToggleButton>
+            <ToggleButton active={toggle === "backend"} onClick={() => setToggle("backend")}>
+              Backend <CountBadge>{projects.filter(p => sourceFilter ? (p.github && p.category.includes("backend")) : p.category.includes("backend")).length}</CountBadge>
+            </ToggleButton>
+          </ToggleButtonGroup>
 
-        <ToggleSwitchContainer>
-          <ToggleSwitch
-            type="checkbox"
-            checked={sourceFilter}
-            onChange={() => setSourceFilter(!sourceFilter)}
-          />
-          <ToggleSwitchLabel>Source Code Available Only</ToggleSwitchLabel>
-        </ToggleSwitchContainer>
+          <ToggleSwitchContainer>
+            <ToggleSwitch
+              type="checkbox"
+              checked={sourceFilter}
+              onChange={() => setSourceFilter(!sourceFilter)}
+            />
+            <ToggleSwitchLabel>Source Code Only</ToggleSwitchLabel>
+          </ToggleSwitchContainer>
+        </FiltersRow>
 
         {/* Pinned Projects */}
         {visiblePinned.length > 0 && (
