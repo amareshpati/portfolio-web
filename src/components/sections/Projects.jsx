@@ -202,7 +202,7 @@ const CardContainer = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
   gap: 28px;
   width: 100%;
-  align-items: stretch;
+  align-items: start;
 `;
 
 const SectionLabel = styled.div`

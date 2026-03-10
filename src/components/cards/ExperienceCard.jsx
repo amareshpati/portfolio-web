@@ -10,11 +10,18 @@ const Top = styled.div`
   gap: 12px;
 `;
 const Image = styled.img`
-  height: 50px;
+  width: 54px;
+  height: 54px;
   border-radius: 10px;
   margin-top: 4px;
+  object-fit: contain;
+  background: ${({ theme }) => theme.white || "#ffffff"};
+  padding: 4px;
+  box-sizing: border-box;
+  flex-shrink: 0;
   @media only screen and (max-width: 768px) {
-    height: 40px;
+    width: 42px;
+    height: 42px;
   }
 `;
 const Body = styled.div`
@@ -112,7 +119,13 @@ const ExperienceCard = ({ experience }) => {
           width="100%"
           height="100%"
           alt={experience?.company}
-          style={{ borderRadius: "50%", objectFit: "cover" }}
+          style={{
+            borderRadius: "50%",
+            objectFit: "contain",
+            background: "#ffffff",
+            padding: "6px",
+            boxSizing: "border-box",
+          }}
           src={experience?.img}
         />
       }
@@ -125,7 +138,7 @@ const ExperienceCard = ({ experience }) => {
         boxShadow: "rgba(23, 92, 230, 0.15) 0px 4px 24px",
         backgroundColor: theme.card,
         border: `1px solid ${theme.primary + 80}`,
-        borderRadius: "6px",
+        borderRadius: "20px",
       }}
       contentArrowStyle={{
         borderRight: `7px solid ${theme.card}`,

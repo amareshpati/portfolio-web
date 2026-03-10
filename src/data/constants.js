@@ -16,7 +16,8 @@ export const Bio = {
   ],
   description:
     "I am a skilled and adaptive developer, driven by a passion for tech innovation. With hands-on experience in delivering scalable, high-quality solutions, I approach challenges with a growth mindset and a commitment to impactful results.",
-  github: "https://github.com/ptiamaresh13",
+  experienceYears: new Date().getFullYear() - 2022,
+  github: "https://github.com/amareshpati",
   resume: "/resume.pdf",
   linkedin: "https://www.linkedin.com/in/amaresh-pati-1179b2184/",
   // twitter: "https://twitter.com/RishavChanda",

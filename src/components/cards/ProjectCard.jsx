@@ -68,9 +68,9 @@ const Title = styled.div`
 `;
 
 const DescriptionContainer = styled.div`
-  overflow-y: ${({ expanded }) => (expanded ? "auto" : "hidden")};
-  max-height: ${({ expanded }) => (expanded ? "160px" : "60px")};
-  transition: max-height 0.3s ease;
+  overflow: hidden;
+  max-height: ${({ expanded }) => (expanded ? "800px" : "60px")};
+  transition: max-height 0.5s ease-in-out;
 `;
 
 const DescriptionText = styled.div`
@@ -78,9 +78,14 @@ const DescriptionText = styled.div`
   font-weight: 400;
   color: ${({ theme }) => theme.text_secondary};
   display: ${({ expanded }) => (expanded ? "block" : "-webkit-box")};
-  -webkit-line-clamp: ${({ expanded }) => (expanded ? "none" : "3")};
+  -webkit-line-clamp: ${({ expanded }) => (expanded ? "unset" : "3")};
   -webkit-box-orient: vertical;
   overflow: hidden;
+  margin-top: ${({ expanded }) => (expanded ? "6px" : "0")};
+  
+  &:first-child {
+    margin-top: 0;
+  }
 `;
 
 const ReadMore = styled.span`

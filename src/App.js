@@ -40,6 +40,22 @@ const GlobalStyle = createGlobalStyle`
     from { clip-path: circle(0px    at var(--ripple-x, 50%) var(--ripple-y, 50%)); }
     to   { clip-path: circle(200vmax at var(--ripple-x, 50%) var(--ripple-y, 50%)); }
   }
+
+  /* ── iOS Safari safe-area fixes ──────────────────────────────── */
+  html, body {
+    /* Fills the full viewport including the notch & home indicator area */
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    /* Pad the very bottom so our content clears the home indicator */
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    background-color: ${({ theme }) => theme.bg};
+  }
+
+  #root {
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    background-color: ${({ theme }) => theme.bg};
+  }
 `;
 
 const Wrapper = styled.div`
@@ -69,6 +85,18 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem("portfolio-theme", isDark ? "dark" : "light");
+
+    // Sync browser status bar / address bar color with our theme
+    const color = isDark ? darkTheme.bg : lightTheme.bg;
+    let meta = document.getElementById("theme-color-meta");
+    if (!meta) {
+      // Fallback: create it if somehow missing
+      meta = document.createElement("meta");
+      meta.id = "theme-color-meta";
+      meta.name = "theme-color";
+      document.head.appendChild(meta);
+    }
+    meta.content = color;
   }, [isDark]);
 
   const toggleTheme = (x, y) => {
