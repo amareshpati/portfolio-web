@@ -22,6 +22,7 @@ export const Bio = {
   // twitter: "https://twitter.com/RishavChanda",
   insta: "https://www.instagram.com/amaresh_13/",
   // facebook: "https://www.facebook.com/rishav.chanda.165/",
+  blogs: "https://blogs.devvloper.in",
 };
 
 export const skills = [

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link as LinkR } from "react-router-dom";
 import styled, { useTheme, keyframes } from "styled-components";
 import { Bio } from "../data/constants";
-import { MenuRounded } from "@mui/icons-material";
+import { MenuRounded, LightModeRounded, DarkModeRounded } from "@mui/icons-material";
 import { useThemeToggle } from "../utils/ThemeContext";
 
 const Nav = styled.div`
@@ -15,7 +15,7 @@ const Nav = styled.div`
   position: sticky;
   top: 0;
   z-index: 10;
-  color: white;
+  color: ${({ theme }) => theme.text_primary};
 `;
 
 const NavbarContainer = styled.div`
@@ -99,23 +99,30 @@ const spinOnce = keyframes`
 `;
 
 const ThemeToggleBtn = styled.button`
-  background: none;
-  border: 1px solid ${({ theme }) => theme.text_secondary};
+  background: ${({ theme }) => theme.card_light};
+  border: 1px solid ${({ theme }) => theme.primary + 40};
   border-radius: 50%;
-  width: 38px;
-  height: 38px;
+  width: 42px;
+  height: 42px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-size: 18px;
-  color: ${({ theme }) => theme.text_primary};
-  transition: border-color 0.3s ease, color 0.3s ease;
+  color: ${({ theme }) => theme.primary};
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   flex-shrink: 0;
   overflow: hidden;
+  box-shadow: 0 4px 12px ${({ theme }) => theme.black + 15};
+  padding: 0;
+
   &:hover {
+    background: ${({ theme }) => theme.primary + 15};
     border-color: ${({ theme }) => theme.primary};
-    color: ${({ theme }) => theme.primary};
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(0.95);
   }
 `;
 
@@ -126,13 +133,14 @@ const IconSpan = styled.span`
 `;
 
 const MobileIcon = styled.div`
-  height: 100%;
   display: flex;
   align-items: center;
+  gap: 12px;
+  height: 100%;
   color: ${({ theme }) => theme.text_primary};
   display: none;
   @media screen and (max-width: 768px) {
-    display: block;
+    display: flex;
   }
 `;
 
@@ -176,10 +184,21 @@ const Navbar = () => {
   return (
     <Nav>
       <NavbarContainer>
-        <NavLogo to="/"></NavLogo>
+        <NavLogo to="/">
+          <div style={{ display: 'flex', alignItems: 'center', color: theme.text_primary, cursor: 'pointer' }}>
+            {Bio.name}
+          </div>
+        </NavLogo>
 
-        <MobileIcon onClick={() => setIsOpen(!isOpen)}>
-          <MenuRounded style={{ color: "inherit" }} />
+        <MobileIcon>
+          <ThemeToggleBtn onClick={handleToggle} title="Toggle theme">
+            <IconSpan $spinning={spinning} onAnimationEnd={() => setSpinning(false)}>
+              {isDark ? <LightModeRounded sx={{ fontSize: "22px" }} /> : <DarkModeRounded sx={{ fontSize: "22px" }} />}
+            </IconSpan>
+          </ThemeToggleBtn>
+          <div onClick={() => setIsOpen(!isOpen)}>
+            <MenuRounded style={{ color: "inherit" }} />
+          </div>
         </MobileIcon>
 
         <NavItems>
@@ -188,6 +207,7 @@ const Navbar = () => {
           <NavLink href="#Experience">Experience</NavLink>
           <NavLink href="#Projects">Projects</NavLink>
           <NavLink href="#Education">Education</NavLink>
+          <NavLink href={Bio.blogs} target="_blank" rel="noopener noreferrer">Blogs</NavLink>
         </NavItems>
 
         {isOpen && (
@@ -206,6 +226,9 @@ const Navbar = () => {
             </NavLink>
             <NavLink onClick={() => setIsOpen(!isOpen)} href="#Education">
               Education
+            </NavLink>
+            <NavLink onClick={() => setIsOpen(!isOpen)} href={Bio.blogs} target="_blank" rel="noopener noreferrer">
+              Blogs
             </NavLink>
             <GithubButton
               href={Bio.github}
@@ -226,7 +249,7 @@ const Navbar = () => {
               $spinning={spinning}
               onAnimationEnd={() => setSpinning(false)}
             >
-              {isDark ? "☀️" : "🌙"}
+              {isDark ? <LightModeRounded sx={{ fontSize: "22px" }} /> : <DarkModeRounded sx={{ fontSize: "22px" }} />}
             </IconSpan>
           </ThemeToggleBtn>
           <GithubButton href={Bio.github} target="_Blank" style={{ marginLeft: "12px" }}>
