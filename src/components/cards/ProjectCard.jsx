@@ -20,6 +20,20 @@ const Card = styled.div`
     filter: brightness(1.1);
   }
 `;
+
+const PinnedBadge = styled.div`
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  color: ${({ theme }) => theme.primary};
+  background: ${({ theme }) => theme.primary + 18};
+  border: 1px solid ${({ theme }) => theme.primary + 50};
+  border-radius: 20px;
+  padding: 3px 10px;
+  align-self: flex-start;
+`;
 const Image = styled.img`
   width: 100%;
   height: 180px;
@@ -109,11 +123,12 @@ const Button = styled.a`
   text-align: center;
 `;
 
-const ProjectCard = ({ project }) => {
+const ProjectCard = ({ project, pinned }) => {
   const [expanded, setExpanded] = useState(false);
 
   return (
     <Card>
+      {pinned && <PinnedBadge>📌 Pinned</PinnedBadge>}
       <Image src={project.image} />
       <Tags></Tags>
       <Details>

@@ -77,7 +77,7 @@ const ToggleButton = styled.div`
   ${({ active, theme }) =>
     active &&
     `
-  background:  ${theme.primary + 20};
+    background: ${theme.primary + 20};
   `}
 `;
 
@@ -139,71 +139,113 @@ const CardContainer = styled.div`
   flex-wrap: wrap;
 `;
 
+const SectionLabel = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 24px 0 8px;
+`;
+
+const SectionTitle = styled.span`
+  font-size: 18px;
+  font-weight: 600;
+  color: ${({ theme }) => theme.text_primary};
+  white-space: nowrap;
+`;
+
+const SectionLine = styled.div`
+  flex: 1;
+  height: 1px;
+  background: ${({ theme }) => theme.text_secondary + 40};
+`;
+
+const PinIcon = styled.span`
+  font-size: 14px;
+  opacity: 0.6;
+`;
+
+const ShowMoreBtn = styled.button`
+  margin-top: 36px;
+  padding: 12px 40px;
+  background: none;
+  border: 1.5px solid ${({ theme }) => theme.primary};
+  color: ${({ theme }) => theme.primary};
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+
+  &:hover {
+    background: ${({ theme }) => theme.primary};
+    color: ${({ theme }) => theme.white};
+    transform: scale(1.04);
+  }
+
+  &:active {
+    transform: scale(0.97);
+  }
+`;
+
 const Projects = () => {
   const [toggle, setToggle] = useState("all");
   const [sourceFilter, setSourceFilter] = useState(false);
+  const [showAll, setShowAll] = useState(false);
 
-  const filteredProjects = projects.filter((project) => {
-    // Check if the project category includes the selected toggle category
-    if (toggle !== "all" && !project.category.includes(toggle)) return false;
-    if (sourceFilter && !project.github) return false;
-    return true;
-  });
+  const applyFilters = (list) => {
+    return list.filter((project) => {
+      if (toggle !== "all" && !project.category.includes(toggle)) return false;
+      if (sourceFilter && !project.github) return false;
+      return true;
+    });
+  };
+
+  const pinnedProjects = applyFilters(projects.filter((p) => p.pinned));
+  const recentProjects = applyFilters(projects.filter((p) => !p.pinned));
+
+  // Default view: up to 3 pinned + up to 3 recent; Show All: everything
+  const visiblePinned = showAll ? pinnedProjects : pinnedProjects.slice(0, 3);
+  const visibleRecent = showAll ? recentProjects : recentProjects.slice(0, Math.max(0, 6 - visiblePinned.length));
+
+  const totalFiltered = pinnedProjects.length + recentProjects.length;
 
   const projectCount = (type = "all") => {
-    console.log(type)
-    if (type == "all") {
-      return ` (${(sourceFilter ?
-        projects.filter(project => project.github)
-        : projects).length})`
+    if (type === "all") {
+      return ` (${(sourceFilter ? projects.filter((p) => p.github) : projects).length})`;
     }
+    return ` (${projects.filter((p) => {
+      return sourceFilter
+        ? p?.github && p.category.includes(type)
+        : p.category.includes(type);
+    }).length})`;
+  };
 
-    return `(${projects.filter(project => {
-      return sourceFilter ?
-        (project?.github && project.category.includes(type))
-        : project.category.includes(type)
-    }).length})`
-  }
   return (
     <Container id="Projects">
       <Wrapper>
         <Title>Projects</Title>
-        <Desc
-          style={{
-            marginBottom: "40px",
-          }}
-        >
+        <Desc style={{ marginBottom: "40px" }}>
           I have worked on a wide range of projects. From web apps to android
           apps. Here are some of my projects.
         </Desc>
 
         <ToggleButtonGroup>
-          <ToggleButton
-            active={toggle === "all"}
-            onClick={() => setToggle("all")}
-          >
+          <ToggleButton active={toggle === "all"} onClick={() => setToggle("all")}>
             ALL{projectCount()}
           </ToggleButton>
           <Divider />
-          <ToggleButton
-            active={toggle === "Mobile app"}
-            onClick={() => setToggle("Mobile app")}
-          >
-            Mobile App {projectCount("Mobile app")}
+          <ToggleButton active={toggle === "Mobile app"} onClick={() => setToggle("Mobile app")}>
+            Mobile App{projectCount("Mobile app")}
           </ToggleButton>
           <Divider />
-          <ToggleButton
-            active={toggle === "web app"}
-            onClick={() => setToggle("web app")}
-          >
+          <ToggleButton active={toggle === "web app"} onClick={() => setToggle("web app")}>
             Web App{projectCount("web app")}
           </ToggleButton>
           <Divider />
-          <ToggleButton
-            active={toggle === "backend"}
-            onClick={() => setToggle("backend")}
-          >
-            Backend {projectCount("backend")}
+          <ToggleButton active={toggle === "backend"} onClick={() => setToggle("backend")}>
+            Backend{projectCount("backend")}
           </ToggleButton>
         </ToggleButtonGroup>
 
@@ -211,18 +253,48 @@ const Projects = () => {
           <ToggleSwitch
             type="checkbox"
             checked={sourceFilter}
-            onChange={() => { setSourceFilter(!sourceFilter); }}
+            onChange={() => setSourceFilter(!sourceFilter)}
           />
-          <ToggleSwitchLabel>
-            Source Code Available Only
-          </ToggleSwitchLabel>
+          <ToggleSwitchLabel>Source Code Available Only</ToggleSwitchLabel>
         </ToggleSwitchContainer>
 
-        <CardContainer>
-          {filteredProjects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
-        </CardContainer>
+        {/* Pinned Projects */}
+        {visiblePinned.length > 0 && (
+          <>
+            <SectionLabel>
+              <PinIcon>📌</PinIcon>
+              <SectionTitle>Pinned Projects</SectionTitle>
+              <SectionLine />
+            </SectionLabel>
+            <CardContainer>
+              {visiblePinned.map((project) => (
+                <ProjectCard key={`pinned-${project.id}`} project={project} pinned />
+              ))}
+            </CardContainer>
+          </>
+        )}
+
+        {/* Recent Projects */}
+        {visibleRecent.length > 0 && (
+          <>
+            <SectionLabel>
+              <SectionTitle>Recent Projects</SectionTitle>
+              <SectionLine />
+            </SectionLabel>
+            <CardContainer>
+              {visibleRecent.map((project) => (
+                <ProjectCard key={`recent-${project.id}`} project={project} />
+              ))}
+            </CardContainer>
+          </>
+        )}
+
+        {/* Show More / Show Less */}
+        {totalFiltered > 6 && (
+          <ShowMoreBtn onClick={() => setShowAll((prev) => !prev)}>
+            {showAll ? "Show Less ↑" : `Show More (${totalFiltered - 6} more) ↓`}
+          </ShowMoreBtn>
+        )}
       </Wrapper>
     </Container>
   );

@@ -216,6 +216,7 @@ export const projects = [
     github: "",
     webapp: "https://play.google.com/store/apps/details?id=com.coversure",
     overview: "All-in-one insurance app: manage policies, get renewal alerts, access assistance, and understand coverage.",
+    pinned: true,
     member: [{ name: "", img: "", linkedin: "", github: "" }]
   },
   {
@@ -232,6 +233,7 @@ export const projects = [
     github: "",
     webapp: "https://play.google.com/store/apps/details?id=com.smylee.smyleeapp",
     overview: "Plan parties and meetups with chat, RSVPs, reminders, and a unique charity-pledge mechanism.",
+    pinned: true,
     member: [{ name: "", img: "", linkedin: "", github: "" }]
   },
 
@@ -250,6 +252,7 @@ export const projects = [
     github: "",
     webapp: "https://play.google.com/store/apps/details?id=com.europeanathletics.mobile",
     overview: "Official European Athletics app delivering live results, schedules, and athlete insights with interactive fan features.",
+    pinned: true,
     member: [{ name: "", img: "", linkedin: "", github: "" }]
   },
 
