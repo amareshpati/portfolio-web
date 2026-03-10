@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
+
 import { VerticalTimelineElement } from "react-vertical-timeline-component";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 
 const Top = styled.div`
   width: 100%;
@@ -10,11 +10,18 @@ const Top = styled.div`
   gap: 12px;
 `;
 const Image = styled.img`
-  height: 50px;
+  width: 54px;
+  height: 54px;
   border-radius: 10px;
   margin-top: 4px;
+  object-fit: contain;
+  background: ${({ theme }) => theme.white || "#ffffff"};
+  padding: 4px;
+  box-sizing: border-box;
+  flex-shrink: 0;
   @media only screen and (max-width: 768px) {
-    height: 40px;
+    width: 42px;
+    height: 42px;
   }
 `;
 const Body = styled.div`
@@ -104,7 +111,7 @@ const ButtonWrapper = styled.div`
 
 const ExperienceCard = ({ experience }) => {
   const [showMore, setShowMore] = useState(false);
-
+  const theme = useTheme();
   return (
     <VerticalTimelineElement
       icon={
@@ -112,7 +119,13 @@ const ExperienceCard = ({ experience }) => {
           width="100%"
           height="100%"
           alt={experience?.company}
-          style={{ borderRadius: "50%", objectFit: "cover" }}
+          style={{
+            borderRadius: "50%",
+            objectFit: "contain",
+            background: "#ffffff",
+            padding: "6px",
+            boxSizing: "border-box",
+          }}
           src={experience?.img}
         />
       }
@@ -120,15 +133,15 @@ const ExperienceCard = ({ experience }) => {
         display: "flex",
         flexDirection: "column",
         gap: "12px",
-        background: "#1d1836",
-        color: "#fff",
+        background: theme.card,
+        color: theme.text_primary,
         boxShadow: "rgba(23, 92, 230, 0.15) 0px 4px 24px",
-        backgroundColor: "rgba(17, 25, 40, 0.83)",
-        border: "1px solid rgba(255, 255, 255, 0.125)",
-        borderRadius: "6px",
+        backgroundColor: theme.card,
+        border: `1px solid ${theme.primary + 80}`,
+        borderRadius: "20px",
       }}
       contentArrowStyle={{
-        borderRight: "7px solid rgba(255, 255, 255, 0.3)",
+        borderRight: `7px solid ${theme.card}`,
       }}
       date={experience?.date}
     >
