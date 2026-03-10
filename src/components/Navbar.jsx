@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link as LinkR } from "react-router-dom";
-import styled, { useTheme, keyframes, css } from "styled-components";
+import styled, { keyframes, css } from "styled-components";
 import { Bio } from "../data/constants";
 import {
   MenuRounded,
@@ -315,7 +315,6 @@ const NAV_LINKS = [
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [spinning, setSpinning] = useState(false);
-  const theme = useTheme();
   const { isDark, toggleTheme } = useThemeToggle();
 
   // Close drawer on resize to desktop

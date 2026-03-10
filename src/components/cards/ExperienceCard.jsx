@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
+
 import { VerticalTimelineElement } from "react-vertical-timeline-component";
 import styled, { useTheme } from "styled-components";
 

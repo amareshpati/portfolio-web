@@ -277,17 +277,6 @@ const Projects = () => {
 
   const totalFiltered = pinnedProjects.length + recentProjects.length;
 
-  const projectCount = (type = "all") => {
-    if (type === "all") {
-      return ` (${(sourceFilter ? projects.filter((p) => p.github) : projects).length})`;
-    }
-    return ` (${projects.filter((p) => {
-      return sourceFilter
-        ? p?.github && p.category.includes(type)
-        : p.category.includes(type);
-    }).length})`;
-  };
-
   return (
     <Container id="Projects">
       <Wrapper>
