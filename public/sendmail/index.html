@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Initializing Handshake...</title>
+    <style>
+        body {
+            background-color: #0d1117;
+            color: #c9d1d9;
+            font-family: monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+        }
+        .loader {
+            color: #3fb950;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p class="loader">> Initializing SMTP_TLS handshake...</p>
+        <p>> Redirecting to mail client...</p>
+    </div>
+    <script>
+        const email = "patiamaresh13@gmail.com";
+        const subject = "Collaboration Request";
+        const body = "Hi Amaresh,\n\nI saw your portfolio and would like to connect...";
+        
+        window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        
+        // Fallback for some browsers
+        setTimeout(() => {
+            window.location.href = "/";
+        }, 3000);
+    </script>
+</body>
+</html>

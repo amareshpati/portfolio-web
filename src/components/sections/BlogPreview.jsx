@@ -1,9 +1,14 @@
 import styled from "styled-components";
 import { Bio } from "../../data/constants";
-import { Tilt } from "react-tilt";
 import { motion } from "framer-motion";
-import { headTextAnimation } from "../../utils/motion";
-import { OpenInNew } from "@mui/icons-material";
+import {
+  MenuBook,
+  FolderOpen,
+  Article,
+  Launch,
+  History,
+  Label
+} from "@mui/icons-material";
 
 const Container = styled.div`
   display: flex;
@@ -12,219 +17,299 @@ const Container = styled.div`
   position: relative;
   z-index: 1;
   align-items: center;
-  margin-top: 50px;
-  padding: 40px 16px;
-  @media (max-width: 960px) {
-    padding: 30px 16px;
-  }
+  padding: 80px 20px;
 `;
 
-const Wrapper = styled.div`
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: row;
+const WikiContainer = styled(motion.div)`
   width: 100%;
   max-width: 1100px;
-  gap: 40px;
   background: ${({ theme }) => theme.card};
-  border: 0.1px solid ${({ theme }) => theme.primary};
+  border: 1px solid ${({ theme }) => theme.text_secondary + 25};
   border-radius: 16px;
-  padding: 40px;
-  box-shadow: rgba(23, 92, 230, 0.15) 0px 4px 24px;
+  overflow: hidden;
+  display: flex;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
   
   @media (max-width: 960px) {
     flex-direction: column;
-    padding: 32px;
-    gap: 24px;
   }
 `;
 
-const ContentSection = styled.div`
+const Sidebar = styled.div`
+  width: 280px;
+  background: ${({ theme }) => theme.bgLight + "80"};
+  border-right: 1px solid ${({ theme }) => theme.text_secondary + 20};
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  flex: 1;
-
-  @media (max-width: 960px) {
-    align-items: center;
-    text-align: center;
-  }
-`;
-
-const ImageSection = styled.div`
-  flex: 1.5;
-  display: flex;
-  justify-content: flex-end;
-  position: relative;
-
-  @media (max-width: 960px) {
-    justify-content: center;
-    width: 100%;
-    flex: 1;
-  }
-`;
-
-const Title = styled.div`
-  font-size: 42px;
-  text-align: left;
-  font-weight: 700;
-  margin-bottom: 12px;
-  color: ${({ theme }) => theme.text_primary};
+  padding: 24px;
+  gap: 24px;
   
-  @media (max-width: 768px) {
-    text-align: center;
-    font-size: 32px;
-  }
-`;
-
-const Desc = styled.div`
-  font-size: 18px;
-  text-align: left;
-  font-weight: 400;
-  color: ${({ theme }) => theme.text_secondary};
-  margin-bottom: 32px;
-  line-height: 1.5;
-
-  @media (max-width: 768px) {
-    text-align: center;
-    font-size: 16px;
-    margin-bottom: 24px;
-  }
-`;
-
-const IframeContainer = styled.div`
-  width: 100%;
-  max-width: 700px;
-  height: 400px;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
-  border: 1px solid ${({ theme }) => theme.primary + 50};
-  background: white;
-  position: relative;
-
   @media (max-width: 960px) {
-    max-width: 100%;
-    height: 300px;
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid ${({ theme }) => theme.text_secondary + 20};
+    padding: 20px;
   }
+`;
+
+const SidebarSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`;
+
+const SidebarTitle = styled.div`
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: ${({ theme }) => theme.text_secondary};
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
+
+const NavLink = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: ${({ active, theme }) => active ? theme.primary : theme.text_secondary};
+  cursor: pointer;
+  transition: all 0.2s;
+  padding: 6px 12px;
+  border-radius: 6px;
+  background: ${({ active, theme }) => active ? theme.primary + 10 : "transparent"};
+  
+  &:hover {
+    color: ${({ theme }) => theme.primary};
+    background: ${({ theme }) => theme.primary + 5};
+  }
+`;
+
+const MainContent = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: ${({ theme }) => theme.card};
+`;
+
+const ContentHeader = styled.div`
+  padding: 16px 32px;
+  border-bottom: 1px solid ${({ theme }) => theme.text_secondary + 15};
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  
+  @media (max-width: 640px) {
+    padding: 16px 20px;
+  }
+`;
+
+const Breadcrumbs = styled.div`
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  color: ${({ theme }) => theme.text_secondary};
+  span { color: ${({ theme }) => theme.primary}; }
+`;
+
+const ContentBody = styled.div`
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  
+  @media (max-width: 640px) {
+    padding: 24px;
+  }
+`;
+
+const Title = styled.h2`
+  font-size: 36px;
+  font-weight: 700;
+  color: ${({ theme }) => theme.text_primary};
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  
+  &::before {
+    content: '#';
+    color: ${({ theme }) => theme.primary + 80};
+    font-weight: 400;
+  }
+  
+  @media (max-width: 640px) {
+    font-size: 28px;
+  }
+`;
+
+const MetaRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: -8px;
+  flex-wrap: wrap;
+`;
+
+const MetaItem = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: ${({ theme }) => theme.text_secondary};
+`;
+
+const Desc = styled.p`
+  font-size: 17px;
+  line-height: 1.6;
+  color: ${({ theme }) => theme.text_secondary};
+  margin: 0;
+`;
+
+const PreviewStage = styled.div`
+  width: 100%;
+  height: 350px;
+  background: ${({ theme }) => theme.bg};
+  border-radius: 12px;
+  border: 1px solid ${({ theme }) => theme.text_secondary + 25};
+  overflow: hidden;
+  position: relative;
+  margin-top: 20px;
+  box-shadow: inset 0 2px 10px rgba(0,0,0,0.1);
 `;
 
 const StyledIframe = styled.iframe`
-  width: 200%; /* Double the width */
-  height: 200%; /* Double the height */
+  width: 200%;
+  height: 200%;
   border: none;
-  transform: scale(0.5); /* Scale back to fit */
+  transform: scale(0.5);
   transform-origin: 0 0;
+  opacity: 0.9;
+  filter: grayscale(0.2);
+  transition: all 0.3s;
+  
+  &:hover {
+    opacity: 1;
+    filter: none;
+  }
 `;
 
-const ExternalLinkIcon = styled.a`
+const FloatingAction = styled.a`
   position: absolute;
-  top: 12px;
-  right: 12px;
-  z-index: 10;
-  background: ${({ theme }) => theme.card + "CC"};
-  color: ${({ theme }) => theme.text_primary};
-  padding: 8px;
-  border-radius: 50%;
+  bottom: 20px;
+  right: 20px;
+  background: ${({ theme }) => theme.primary};
+  color: white;
+  padding: 12px 24px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease;
-  backdrop-filter: blur(4px);
-  border: 1px solid ${({ theme }) => theme.primary + 33};
-
+  gap: 10px;
+  box-shadow: 0 10px 20px ${({ theme }) => theme.primary + 40};
+  transition: all 0.2s;
+  
   &:hover {
-    background: ${({ theme }) => theme.primary};
-    color: white;
-    transform: scale(1.1);
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px ${({ theme }) => theme.primary + 60};
   }
 `;
 
-const VisitButton = styled.a`
-  display: inline-block;
-  text-decoration: none;
-  text-align: center;
-  padding: 14px 34px;
-  background: hsla(271, 100%, 50%, 1);
-  background: linear-gradient(
-    225deg,
-    hsla(271, 100%, 50%, 1) 0%,
-    hsla(294, 100%, 50%, 1) 100%
-  );
-  border-radius: 50px;
-  font-weight: 600;
-  font-size: 18px;
-  color: white;
-  transition: all 0.3s ease-in-out;
-  box-shadow: 0px 4px 15px ${({ theme }) => theme.primary + 40};
-
-  &:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0px 8px 25px ${({ theme }) => theme.primary + 60};
-    filter: brightness(1.1);
-  }
-
-  @media (max-width: 640px) {
-    padding: 12px 28px;
-    font-size: 16px;
-  }
+const TagGrid = styled.div`
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
 `;
 
-const Highlight = styled.span`
+const Tag = styled.span`
+  font-size: 12px;
+  padding: 4px 10px;
+  background: ${({ theme }) => theme.primary + 10};
   color: ${({ theme }) => theme.primary};
+  border-radius: 4px;
+  font-weight: 600;
 `;
 
 const BlogPreview = () => {
   return (
     <Container id="Blog">
-      <motion.div style={{ width: "100%", display: "flex", justifyContent: "center" }} {...headTextAnimation}>
-        <Wrapper>
-          <ContentSection>
-            <Title>
-              Explore My <Highlight>Blog</Highlight>
-            </Title>
-            <Desc>
-              I regularly write articles on modern mobile app development, software engineering patterns,
-              web development, and my experiences solving real-world challenges. Check out
-              my latest insights and tutorials!
-            </Desc>
-            <VisitButton href={Bio.blogs} target="_blank" rel="noopener noreferrer">
-              Visit Blogs Site
-            </VisitButton>
-          </ContentSection>
+      <WikiContainer
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
+        <Sidebar>
+          <SidebarSection>
+            <SidebarTitle>
+              <FolderOpen style={{ fontSize: 16 }} /> Knowledge Base
+            </SidebarTitle>
+            <NavLink active>
+              <Article style={{ fontSize: 18 }} /> Overview.md
+            </NavLink>
+            <NavLink>
+              <History style={{ fontSize: 18 }} /> Recent_Snippets
+            </NavLink>
+          </SidebarSection>
 
-          <ImageSection>
-            <Tilt
-              options={{
-                max: 15,
-                scale: 1.02,
-                speed: 400,
-                glare: true,
-                "max-glare": 0.2
-              }}
-            >
-              <IframeContainer>
-                <ExternalLinkIcon
-                  href={Bio.blogs}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  title="Open in next tab"
-                >
-                  <OpenInNew sx={{ fontSize: 20 }} />
-                </ExternalLinkIcon>
-                <StyledIframe
-                  src={Bio.blogs}
-                  title="Blog Preview"
-                  loading="lazy"
-                />
-              </IframeContainer>
-            </Tilt>
-          </ImageSection>
-        </Wrapper>
-      </motion.div>
+          {/* <SidebarSection>
+            <SidebarTitle>
+              <Label style={{ fontSize: 16 }} /> TOPICS
+            </SidebarTitle>
+            <NavLink># React_Native</NavLink>
+            <NavLink># System_Design</NavLink>
+            <NavLink># DevOps_Logs</NavLink>
+            <NavLink># Web_Eng</NavLink>
+          </SidebarSection> */}
+        </Sidebar>
+
+        <MainContent>
+          <ContentHeader>
+            <Breadcrumbs>
+              amareshpati / <span>technical-docs</span> / overview.md
+            </Breadcrumbs>
+            <MetaItem>
+              <History style={{ fontSize: 16 }} /> Last updated today
+            </MetaItem>
+          </ContentHeader>
+
+          <ContentBody>
+            <Title>Engineering Insights</Title>
+
+            <MetaRow>
+              <MetaItem>
+                <MenuBook style={{ fontSize: 18 }} /> 15+ Articles
+              </MetaItem>
+              <TagGrid>
+                <Tag>Tutorials</Tag>
+                <Tag>Architectural Patterns</Tag>
+              </TagGrid>
+            </MetaRow>
+
+            <Desc>
+              A curated collection of deep-dives into modern software engineering.
+              From optimizing React Native bridge performance to managing scalable
+              multi-cloud infrastructures. I share high-frequency updates on my latest
+              technical discoverings and problem-solving strategies.
+            </Desc>
+
+            <PreviewStage>
+              <StyledIframe
+                src={Bio.blogs}
+                title="Blog Live Discovery"
+                loading="lazy"
+              />
+              <FloatingAction href={Bio.blogs} target="_blank">
+                Explore <Launch style={{ fontSize: 18 }} />
+              </FloatingAction>
+            </PreviewStage>
+          </ContentBody>
+        </MainContent>
+      </WikiContainer>
     </Container>
   );
 };

@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { projects } from "../../data/constants";
-import ProjectCard from "../cards/ProjectCard";
+import ProjectItem from "../cards/ProjectItem";
+import ProjectModal from "./ProjectModal";
+import { ListAlt, FilterList, History } from "@mui/icons-material";
 
 const Container = styled.div`
   display: flex;
@@ -12,6 +14,7 @@ const Container = styled.div`
   position: relative;
   z-index: 1;
   align-items: center;
+  margin-bottom: 100px;
 `;
 
 const Wrapper = styled.div`
@@ -23,9 +26,6 @@ const Wrapper = styled.div`
   width: 100%;
   max-width: 1100px;
   gap: 12px;
-  @media (max-width: 960px) {
-    flex-direction: column;
-  }
 `;
 
 const Title = styled.div`
@@ -43,313 +43,300 @@ const Title = styled.div`
 const Desc = styled.div`
   font-size: 18px;
   text-align: center;
-  font-weight: 600;
+  font-weight: 500;
+  max-width: 700px;
   color: ${({ theme }) => theme.text_secondary};
   @media (max-width: 768px) {
     font-size: 16px;
   }
 `;
 
-const ToggleButtonGroup = styled.div`
+const RepoHeader = styled.div`
+  width: 100%;
+  background: ${({ theme }) => theme.card + "40"};
+  border: 1px solid ${({ theme }) => theme.text_secondary + 25};
+  border-radius: 12px 12px 0 0;
+  padding: 16px 24px;
   display: flex;
-  border: 1.5px solid ${({ theme }) => theme.primary};
-  color: ${({ theme }) => theme.primary};
-  font-size: 16px;
-  border-radius: 12px;
-  font-weight: 500;
-  margin: 0;
-  overflow: hidden; /* Clips the child buttons to perfectly match the rounded corners */
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 40px;
+  
   @media (max-width: 768px) {
-    font-size: 13px;
-    border-radius: 8px;
-    width: 100%;
-    overflow-x: auto;
-    /* Hide scrollbar for a clean UI on mobile */
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-    &::-webkit-scrollbar {
-      display: none;
-    }
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
   }
 `;
 
-const CountBadge = styled.span`
-  display: inline-flex;
+const RepoStats = styled.div`
+  display: flex;
   align-items: center;
-  justify-content: center;
-  min-width: 22px;
-  height: 18px;
-  padding: 0 5px;
-  border-radius: 10px;
-  font-size: 11px;
-  font-weight: 700;
-  background: ${({ theme }) => theme.primary + 25};
-  color: ${({ theme }) => theme.primary};
-  line-height: 1;
-  transition: all 0.3s ease;
+  gap: 20px;
 `;
 
-const ToggleButton = styled.div`
-  padding: 8px 16px;
-  cursor: pointer;
+const Stat = styled.div`
   display: flex;
   align-items: center;
   gap: 6px;
-  min-width: 80px;
-  justify-content: center;
-  white-space: nowrap;
-  transition: background 0.25s ease, color 0.25s ease;
+  font-size: 14px;
+  color: ${({ theme }) => theme.text_primary};
+  font-weight: 500;
   
-  /* Separator: use left border on all but the first child
-     to avoid any border on the very last element edge */
-  &:not(:first-child) {
-    border-left: 1.5px solid ${({ theme }) => theme.primary};
+  span {
+    color: ${({ theme }) => theme.text_secondary};
+    font-weight: 400;
   }
+`;
 
-  /* Hover: only on real pointer devices (never sticks on touch) */
-  @media (hover: hover) and (pointer: fine) {
-    &:hover:not([data-active="true"]) {
-      background: ${({ theme }) => theme.primary + 20};
-    }
-  }
+const ToggleButtonGroup = styled.div`
+  display: flex;
+  background: ${({ theme }) => theme.card_light + "50"};
+  border-radius: 8px;
+  padding: 4px;
+  border: 1px solid ${({ theme }) => theme.text_secondary + 20};
+`;
 
-  /* Active press feedback for touch devices */
-  &:active {
-    background: ${({ theme }) => theme.primary + 30};
-  }
+const ToggleButton = styled.div`
+  padding: 6px 14px;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: ${({ theme }) => theme.text_secondary};
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 
-  @media (max-width: 768px) {
-    padding: 8px 12px;
-    min-width: 62px;
-    font-size: 13px;
-  }
   ${({ active, theme }) =>
     active &&
     `
     background: ${theme.primary};
-    color: ${theme.white};
-    
-    ${CountBadge} {
-      background: ${theme.white};
-      color: ${theme.primary};
-    }
+    color: #fff !important;
   `}
+  
+  &:hover:not([active="true"]) {
+    color: ${({ theme }) => theme.text_primary};
+  }
 `;
 
-const ToggleSwitchContainer = styled.div`
+const ListContainer = styled.div`
+  width: 100%;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  background: ${({ theme }) => theme.card + "20"};
+  border: 1px solid ${({ theme }) => theme.text_secondary + 25};
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+  padding: 8px;
   gap: 8px;
 `;
 
-const FiltersRow = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  flex-wrap: wrap;
-  gap: 16px;
-  margin: 22px 0 32px;
-  
-  @media (max-width: 768px) {
-    flex-direction: column;
-    gap: 12px;
-    margin: 16px 0 24px;
-  }
-`;
-
-const ToggleSwitchLabel = styled.label`
-  font-size: 16px;
-  font-weight: 500;
-  margin-left: 8px;
-  color: ${({ theme }) => theme.text_primary};
-  @media (max-width: 768px) {
-    font-size: 14px;
-  }
-`;
-
-const ToggleSwitch = styled.input`
-  position: relative;
-  width: 40px;
-  height: 20px;
-  appearance: none;
-  background: ${({ theme }) => theme.primary + 20};
-  outline: none;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: background 0.3s;
-
-  &:checked {
-    background: ${({ theme }) => theme.primary};
-  }
-
-  &::before {
-    content: "";
-    position: absolute;
-    width: 16px;
-    height: 16px;
-    top: 2px;
-    left: 2px;
-    background: #fff;
-    border-radius: 50%;
-    transition: transform 0.3s;
-    transform: ${({ checked }) => (checked ? "translateX(20px)" : "translateX(0)")};
-  }
-`;
-
-const CardContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
-  gap: 28px;
-  width: 100%;
-  align-items: start;
-`;
-
 const SectionLabel = styled.div`
-  width: 100%;
+  padding: 16px 16px 8px;
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin: 24px 0 8px;
-`;
-
-const SectionTitle = styled.span`
-  font-size: 18px;
-  font-weight: 600;
-  color: ${({ theme }) => theme.text_primary};
-  white-space: nowrap;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  color: ${({ theme }) => theme.text_secondary};
+  text-transform: uppercase;
+  letter-spacing: 1px;
 `;
 
 const SectionLine = styled.div`
   flex: 1;
   height: 1px;
-  background: ${({ theme }) => theme.text_secondary + 40};
-`;
-
-const PinIcon = styled.span`
-  font-size: 14px;
-  opacity: 0.6;
+  background: ${({ theme }) => theme.text_secondary + 20};
 `;
 
 const ShowMoreBtn = styled.button`
-  margin-top: 36px;
-  padding: 12px 40px;
+  margin-top: 32px;
+  padding: 10px 24px;
   background: none;
-  border: 1.5px solid ${({ theme }) => theme.primary};
-  color: ${({ theme }) => theme.primary};
-  border-radius: 50px;
-  font-size: 16px;
+  border: 1.5px solid ${({ theme }) => theme.text_secondary + 30};
+  color: ${({ theme }) => theme.text_primary};
+  border-radius: 8px;
+  font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
-  letter-spacing: 0.5px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 
   &:hover {
-    background: ${({ theme }) => theme.primary};
-    color: ${({ theme }) => theme.white};
-    transform: scale(1.04);
+    border-color: ${({ theme }) => theme.primary};
+    color: ${({ theme }) => theme.primary};
+    background: ${({ theme }) => theme.primary + 10};
   }
+`;
 
-  &:active {
-    transform: scale(0.97);
+const SourceFilterContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 4px;
+  cursor: pointer;
+  user-select: none;
+`;
+
+const SourceToggle = styled.div`
+  width: 36px;
+  height: 20px;
+  background: ${({ active, theme }) => active ? theme.primary : theme.text_secondary + "40"};
+  border-radius: 20px;
+  position: relative;
+  transition: all 0.3s ease;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background: #fff;
+    border-radius: 50%;
+    top: 3px;
+    left: ${({ active }) => active ? "19px" : "3px"};
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   }
+`;
+
+const SourceLabel = styled.span`
+  font-size: 13px;
+  font-weight: 600;
+  color: ${({ active, theme }) => active ? theme.primary : theme.text_secondary};
+  transition: all 0.2s;
 `;
 
 const Projects = () => {
   const [toggle, setToggle] = useState("all");
-  const [sourceFilter, setSourceFilter] = useState(false);
+  const [sourceOnly, setSourceOnly] = useState(false);
   const [showAll, setShowAll] = useState(false);
+  const [selectedProject, setSelectedProject] = useState(null);
 
   const applyFilters = (list) => {
     return list.filter((project) => {
-      if (toggle !== "all" && !project.category.includes(toggle)) return false;
-      if (sourceFilter && !project.github) return false;
-      return true;
+      // Source code filter
+      if (sourceOnly && !project.github) return false;
+
+      // Category filter
+      if (toggle === "all") return true;
+
+      const projectCategories = Array.isArray(project.category)
+        ? project.category
+        : [project.category];
+
+      return projectCategories.some(cat =>
+        cat.toLowerCase().includes(toggle.toLowerCase())
+      );
     });
   };
 
   const pinnedProjects = applyFilters(projects.filter((p) => p.pinned));
   const recentProjects = applyFilters(projects.filter((p) => !p.pinned));
 
-  // Default view: up to 3 pinned + up to 3 recent; Show All: everything
   const visiblePinned = showAll ? pinnedProjects : pinnedProjects.slice(0, 3);
-  const visibleRecent = showAll ? recentProjects : recentProjects.slice(0, Math.max(0, 6 - visiblePinned.length));
+  const visibleRecent = showAll ? recentProjects : recentProjects.slice(0, Math.max(0, 8 - visiblePinned.length));
 
   const totalFiltered = pinnedProjects.length + recentProjects.length;
 
   return (
     <Container id="Projects">
       <Wrapper>
-        <Title>Projects</Title>
-        <Desc style={{ marginBottom: "40px" }}>
-          I have worked on a wide range of projects. From web apps to android
-          apps. Here are some of my projects.
+        <Title>Contribution Activity</Title>
+        <Desc>
+          A log of merged features and completed applications.
+          Click on any entry for the full pull request details and source diffs.
         </Desc>
 
-        <FiltersRow>
-          <ToggleButtonGroup>
-            <ToggleButton active={toggle === "all"} onClick={() => setToggle("all")}>
-              ALL <CountBadge>{(sourceFilter ? projects.filter(p => p.github) : projects).length}</CountBadge>
-            </ToggleButton>
-            <ToggleButton active={toggle === "Mobile app"} onClick={() => setToggle("Mobile app")}>
-              Mobile <CountBadge>{projects.filter(p => sourceFilter ? (p.github && p.category.includes("Mobile app")) : p.category.includes("Mobile app")).length}</CountBadge>
-            </ToggleButton>
-            <ToggleButton active={toggle === "web app"} onClick={() => setToggle("web app")}>
-              Web <CountBadge>{projects.filter(p => sourceFilter ? (p.github && p.category.includes("web app")) : p.category.includes("web app")).length}</CountBadge>
-            </ToggleButton>
-            <ToggleButton active={toggle === "backend"} onClick={() => setToggle("backend")}>
-              Backend <CountBadge>{projects.filter(p => sourceFilter ? (p.github && p.category.includes("backend")) : p.category.includes("backend")).length}</CountBadge>
-            </ToggleButton>
-          </ToggleButtonGroup>
+        <RepoHeader>
+          <RepoStats>
+            <Stat>
+              <ListAlt fontSize="small" />
+              {projects.length} <span>Total</span>
+            </Stat>
+            <Stat>
+              <History fontSize="small" />
+              {pinnedProjects.length + recentProjects.length} <span>Visible</span>
+            </Stat>
+          </RepoStats>
 
-          <ToggleSwitchContainer>
-            <ToggleSwitch
-              type="checkbox"
-              checked={sourceFilter}
-              onChange={() => setSourceFilter(!sourceFilter)}
-            />
-            <ToggleSwitchLabel>Source Code Only</ToggleSwitchLabel>
-          </ToggleSwitchContainer>
-        </FiltersRow>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '24px', flexWrap: 'wrap' }}>
+            <SourceFilterContainer onClick={() => setSourceOnly(!sourceOnly)}>
+              <SourceToggle active={sourceOnly} />
+              <SourceLabel active={sourceOnly}>Public Source Only</SourceLabel>
+            </SourceFilterContainer>
 
-        {/* Pinned Projects */}
-        {visiblePinned.length > 0 && (
-          <>
-            <SectionLabel>
-              <PinIcon>📌</PinIcon>
-              <SectionTitle>Pinned Projects</SectionTitle>
-              <SectionLine />
-            </SectionLabel>
-            <CardContainer>
+            <ToggleButtonGroup>
+              <ToggleButton active={toggle === "all"} onClick={() => setToggle("all")}>
+                All
+              </ToggleButton>
+              <ToggleButton active={toggle === "web app"} onClick={() => setToggle("web app")}>
+                Web
+              </ToggleButton>
+              <ToggleButton active={toggle === "Mobile app"} onClick={() => setToggle("Mobile app")}>
+                Mobile
+              </ToggleButton>
+              <ToggleButton active={toggle === "backend"} onClick={() => setToggle("backend")}>
+                Backend
+              </ToggleButton>
+            </ToggleButtonGroup>
+          </div>
+        </RepoHeader>
+
+        <ListContainer>
+          {visiblePinned.length > 0 && (
+            <>
+              <SectionLabel>
+                📌 Pinned Projects <SectionLine />
+              </SectionLabel>
               {visiblePinned.map((project) => (
-                <ProjectCard key={`pinned-${project.id}`} project={project} pinned />
+                <ProjectItem
+                  key={`pinned-${project.id}`}
+                  project={project}
+                  onClick={setSelectedProject}
+                />
               ))}
-            </CardContainer>
-          </>
-        )}
+            </>
+          )}
 
-        {/* Recent Projects */}
-        {visibleRecent.length > 0 && (
-          <>
-            <SectionLabel>
-              <SectionTitle>Recent Projects</SectionTitle>
-              <SectionLine />
-            </SectionLabel>
-            <CardContainer>
+          {visibleRecent.length > 0 && (
+            <>
+              <SectionLabel>
+                <FilterList fontSize="inherit" /> Recent Activity <SectionLine />
+              </SectionLabel>
               {visibleRecent.map((project) => (
-                <ProjectCard key={`recent-${project.id}`} project={project} />
+                <ProjectItem
+                  key={`recent-${project.id}`}
+                  project={project}
+                  onClick={setSelectedProject}
+                />
               ))}
-            </CardContainer>
-          </>
+            </>
+          )}
+        </ListContainer>
+
+        {totalFiltered > (visiblePinned.length + visibleRecent.length) && (
+          <ShowMoreBtn onClick={() => setShowAll(true)}>
+            View more contributions...
+          </ShowMoreBtn>
         )}
 
-        {/* Show More / Show Less */}
-        {totalFiltered > 6 && (
-          <ShowMoreBtn onClick={() => setShowAll((prev) => !prev)}>
-            {showAll ? "Show Less ↑" : `Show More (${totalFiltered - 6} more) ↓`}
+        {showAll && totalFiltered > 8 && (
+          <ShowMoreBtn onClick={() => setShowAll(false)}>
+            Show fewer entries
           </ShowMoreBtn>
         )}
       </Wrapper>
+
+      <ProjectModal
+        project={selectedProject}
+        open={!!selectedProject}
+        onClose={() => setSelectedProject(null)}
+      />
     </Container>
   );
 };

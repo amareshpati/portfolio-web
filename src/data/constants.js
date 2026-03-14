@@ -7,6 +7,43 @@ import ea from "../assets/images/EA.png";
 import smylee from "../assets/images/Smylee.png";
 import coverSure from "../assets/images/CoverSure.png";
 
+export const coreSkills = [
+  // Row 1: Core Technologies (Largest)
+  [
+    { name: "React Native", img: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xMS41IC0xMC4yMzE3NCAyMyAyMC40NjM0OCI+CiAgPHRpdGxlPlJlYWN0IExvZ288L3RpdGxlPgogIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjA1IiBmaWxsPSIjNjFkYWZiIi8+CiAgPGcgc3Ryb2tlPSIjNjFkYWZiIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIi8+CiAgICA8ZWxsaXBzZSByeD0iMTEiIHJ5PSI0LjIiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+CiAgPC9nPgo8L3N2Zz4K" },
+    { name: "Next JS", img: "https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/nextjs-icon.png" },
+    { name: "Node JS", img: "https://cdn-icons-png.flaticon.com/512/5968/5968322.png" },
+    { name: "Express JS", img: "https://ajeetchaulagain.com/static/7cb4af597964b0911fe71cb2f8148d64/87351/express-js.png" },
+    { name: "Flutter", img: "https://cdn.iconscout.com/icon/free/png-256/free-flutter-logo-icon-download-in-svg-png-gif-file-formats--programming-language-coding-development-logos-icons-1720090.png?f=webp" },
+    { name: "FastAPI", img: "https://avatars.githubusercontent.com/u/156354296?s=200&v=4" },
+  ],
+  // Row 2: Databases & Services
+  [
+    { name: "Firebase", img: "https://static.invertase.io/assets/social/firebase-logo.png" },
+    { name: "Supabase", img: "https://static.cdnlogo.com/logos/s/58/supabase_800.png" },
+    { name: "MySQL", img: "https://cdn-icons-png.flaticon.com/128/15484/15484291.png" },
+    { name: "PostgreSQL", img: "https://novastor.com/hs-fs/hubfs/Postgre%20SQL.png?width=900&height=666&name=Postgre%20SQL.png" },
+    { name: "MongoDB", img: "https://d2lgmzy8vjj79z.cloudfront.net/mongodb.svg" },
+  ],
+  // Row 3: Cloud, OS & Native
+  [
+    { name: "AWS", img: "https://cdn.iconscout.com/icon/free/png-256/free-aws-logo-icon-download-in-svg-png-gif-file-formats--cloud-computing-network-server-database-brand-pack-logos-icons-1583149.png?f=webp&w=256" },
+    { name: "Azure", img: "https://www.c-sharpcorner.com/UploadFile/BlogImages/01232023170209PM/Azure%20Icon.png" },
+    { name: "Google Cloud", img: "https://www.gstatic.com/bricks/image/rc7m6af1wpQO_v5GlttqQ_nbbC4jLY0EEN4aVof8WsJLmVyWrtPTHYb5XSm4sJY_142oDc1IsIs.png" },
+    { name: "Android", img: "https://cdn-icons-png.flaticon.com/128/270/270780.png" },
+    { name: "iOS", img: "https://cdn3.iconfinder.com/data/icons/social-media-logos-i-filled-line/2048/5315_-_Apple-512.png" },
+  ],
+  // Row 4: Tools & Helping Tech (Smallest)
+  [
+    { name: "Git", img: "https://git-scm.com/images/logos/downloads/Git-Icon-1788C.png" },
+    { name: "Linux", img: "https://cdn-icons-png.flaticon.com/128/518/518713.png" },
+    { name: "Postman", img: "https://cdn.iconscout.com/icon/free/png-256/free-postman-logo-icon-download-in-svg-png-gif-file-formats--technology-social-media-company-vol-5-pack-logos-icons-3030217.png?f=webp&w=256" },
+    { name: "Cursor", img: "https://cursor.com/marketing-static/_next/image?url=%2Fmarketing-static%2Fdownload%2Fapp-icon-2d-light.png&w=3840&q=70&dpl=dpl_8cKUYZu1sqYpRaRk2LDZDeUbWZxF" },
+    { name: "App Store", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/App_Store_%28iOS%29.svg/512px-App_Store_%28iOS%29.svg.png" },
+    { name: "Play Store", img: "https://developer.android.com/static/distribute/console/images/play-console-blue.png" },
+  ]
+];
+
 export const Bio = {
   name: "Amaresh Pati",
   roles: [
@@ -19,12 +56,17 @@ export const Bio = {
   experienceYears: new Date().getFullYear() - 2022,
   github: "https://github.com/amareshpati",
   resume: "/resume.pdf",
-  linkedin: "https://www.linkedin.com/in/amaresh-pati-1179b2184/",
-  // twitter: "https://twitter.com/RishavChanda",
+  linkedin: "https://www.linkedin.com/in/amareshpati",
+  twitter: "https://x.com/amaresh_1301",
   insta: "https://www.instagram.com/amaresh_13/",
-  // facebook: "https://www.facebook.com/rishav.chanda.165/",
   blogs: "https://blogs.devvloper.in",
   email: "patiamaresh13@gmail.com",
+  brandTagline: "Building scalable mobile & web solutions that users love.",
+  impactStats: [
+    { label: "Products Developed", value: "10+" },
+    { label: "Active Users", value: "150k+" },
+    { label: "Uptime Managed", value: "99.9%" }
+  ]
 };
 
 export const skills = [
@@ -119,7 +161,7 @@ export const experiences = [{
   img: clinohealthLogo, // Clinohealth Innovation logo URL
   role: "Full-Stack Developer",
   company: "Clinohealth Innovation Pvt. Ltd.",
-  date: "Sep 2023 – Present",
+  date: "Sep 2023 – Dec 2024",
   desc: [
     "Created a suite of 4+ mobile apps and 2 web applications, enhancing performance and user satisfaction by 30%.",
     "Developed an Ambulance Booking App, reducing response time by 20%, improving emergency service response.",
@@ -715,3 +757,25 @@ export const projects = [
 
 ];
 
+export const testimonials = [
+  {
+    id: 0, name: 'Avinash Mishra',
+    role: 'Project Manager',
+    img: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
+    desc: 'Amaresh brings clarity and execution excellence to every project. His technical decisions consistently improved our delivery speed and product stability.',
+  },
+  {
+    id: 1,
+    name: 'Yash Shinde',
+    role: 'Java Backend Developer',
+    img: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
+    desc: 'Amaresh is highly reliable and consistently delivers clean, maintainable code. His attention to performance optimization stands out in every project.',
+  },
+  {
+    id: 2,
+    name: 'Aditya Kumar',
+    role: 'Product Manager',
+    img: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
+    desc: 'Working with Amaresh improved our engineering workflow significantly. He bridges the gap between product vision and technical execution effortlessly.',
+  },
+];
