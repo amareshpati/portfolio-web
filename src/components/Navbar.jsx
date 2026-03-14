@@ -307,8 +307,8 @@ const NAV_LINKS = [
   { label: "Skills", href: "#Skills", Icon: BuildRounded },
   { label: "Experience", href: "#Experience", Icon: WorkRounded },
   { label: "Projects", href: "#Projects", Icon: FolderRounded },
+  { label: "Blogs", href: "#Blog", Icon: ArticleRounded },
   { label: "Education", href: "#Education", Icon: SchoolRounded },
-  { label: "Blogs", href: null, Icon: ArticleRounded, external: true },
 ];
 
 /* ─── Component ───────────────────────────────────────────────── */
