@@ -35,10 +35,11 @@ const ScrollBtn = styled.button`
   }
 
   @media (max-width: 768px) {
-    bottom: 20px;
-    right: 20px;
-    width: 45px;
-    height: 45px;
+    bottom: 164px;
+    right: 24px;
+    left: auto;
+    width: 52px;
+    height: 52px;
   }
 `;
 

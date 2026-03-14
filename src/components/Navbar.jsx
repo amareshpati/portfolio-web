@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Link as LinkR } from "react-router-dom";
 import styled, { keyframes, css } from "styled-components";
 import { Bio } from "../data/constants";
 import {
@@ -36,6 +35,11 @@ const fadeIn = keyframes`
   to   { opacity: 1; }
 `;
 
+const slideUp = keyframes`
+  from { opacity: 0; transform: translateY(100%); }
+  to   { opacity: 1; transform: translateY(0); }
+`;
+
 /* ─── Nav Shell ───────────────────────────────────────────────── */
 const Nav = styled.div`
   background-color: ${({ theme }) => theme.bg + "ee"};
@@ -53,6 +57,10 @@ const Nav = styled.div`
   color: ${({ theme }) => theme.text_primary};
   transition: background 0.3s ease;
 
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+
   @media screen and (min-width: 1600px) {
     display: ${({ $navPosition }) => ($navPosition === "top" ? "flex" : "none")};
   }
@@ -65,21 +73,14 @@ const NavbarContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-`;
 
-/* ─── Logo ────────────────────────────────────────────────────── */
-const NavLogo = styled(LinkR)`
-  font-weight: 700;
-  font-size: 20px;
-  text-decoration: none;
-  color: ${({ theme }) => theme.text_primary};
-  letter-spacing: 0.3px;
-  flex-shrink: 0;
-
-  span {
-    color: ${({ theme }) => theme.primary};
+  @media screen and (min-width: 769px) {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 20px;
   }
 `;
+
 
 /* ─── Desktop Nav Items ───────────────────────────────────────── */
 const NavItems = styled.ul`
@@ -128,6 +129,7 @@ const ButtonContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 12px;
+  justify-self: end;
 
   @media screen and (max-width: 768px) {
     display: none;
@@ -192,41 +194,60 @@ const IconSpan = styled.span`
     css`animation: ${spinOnce} 0.45s ease forwards;`}
 `;
 
-/* ─── Mobile Top-Right icons ──────────────────────────────────── */
-const MobileActions = styled.div`
-  display: none;
-  align-items: center;
-  gap: 10px;
-
+const Spacer = styled.div`
   @media screen and (max-width: 768px) {
-    display: flex;
+    display: none;
   }
 `;
 
-const HamburgerBtn = styled.button`
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: ${({ theme }) => theme.text_primary};
+const FloatingActionGroup = styled.div`
+  display: none;
+  @media screen and (max-width: 768px) {
+    display: ${({ $isOpen }) => ($isOpen ? "none" : "flex")};
+    flex-direction: column;
+    gap: 15px;
+    position: fixed;
+    bottom: 30px;
+    right: 24px;
+    z-index: 1001;
+    animation: ${fadeIn} 0.3s ease;
+  }
+`;
+
+const FAB = styled.button`
+  width: 52px;
+  height: 52px;
+  border-radius: 26px;
+  background: ${({ theme }) => theme.card_light + "ee"};
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid ${({ theme }) => theme.primary + "44"};
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
   display: flex;
   align-items: center;
-  padding: 4px;
-  border-radius: 8px;
-  transition: color 0.2s ease;
+  justify-content: center;
+  color: ${({ theme }) => theme.primary};
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
-  &:hover { color: ${({ theme }) => theme.primary}; }
+  &:hover {
+    transform: translateY(-4px);
+    background: ${({ theme }) => theme.primary + "15"};
+    border-color: ${({ theme }) => theme.primary};
+  }
+  &:active { transform: scale(0.9); }
 `;
 
 /* ─── Backdrop ────────────────────────────────────────────────── */
 const Backdrop = styled.div`
   display: none;
-
   @media screen and (max-width: 768px) {
     display: block;
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0.45);
-    z-index: 98;
+    z-index: 999;
     animation: ${fadeIn} 0.25s ease;
   }
 `;
@@ -239,17 +260,39 @@ const MobileDrawer = styled.div`
     display: flex;
     flex-direction: column;
     position: fixed;
-    top: 70px;
+    bottom: 0;
     left: 0;
     right: 0;
-    z-index: 99;
+    z-index: 1000;
     background: ${({ theme }) => theme.card_light};
-    border-bottom: 1px solid ${({ theme }) => theme.primary + "30"};
-    border-radius: 0 0 24px 24px;
-    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.28);
-    padding: 8px 0 20px;
-    animation: ${slideDown} 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-top: 1px solid ${({ theme }) => theme.primary + "30"};
+    border-radius: 30px 30px 0 0;
+    box-shadow: 0 -16px 48px rgba(0, 0, 0, 0.35);
+    padding: 16px 0 40px;
+    animation: ${slideUp} 0.45s cubic-bezier(0.4, 0, 0.2, 1);
   }
+`;
+
+const DrawerHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 24px 8px;
+`;
+
+const CloseButton = styled.button`
+  background: ${({ theme }) => theme.primary + "15"};
+  border: 1px solid ${({ theme }) => theme.primary + "33"};
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: ${({ theme }) => theme.primary};
+  cursor: pointer;
+  
+  &:active { transform: scale(0.9); }
 `;
 
 const DrawerNav = styled.nav`
@@ -300,16 +343,20 @@ const DrawerGithubBtn = styled.a`
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: ${({ theme }) => theme.primary};
-  color: #fff;
+  border: 1.5px solid ${({ theme }) => theme.primary};
+  color: ${({ theme }) => theme.primary};
   border-radius: 12px;
+  margin: 0 24px;
   padding: 12px 0;
   font-size: 14px;
   font-weight: 600;
   text-decoration: none;
-  transition: filter 0.2s ease, transform 0.2s ease;
+  transition: all 0.25s ease;
 
-  &:hover { filter: brightness(1.12); transform: scale(1.02); }
+  &:hover {
+    background: ${({ theme }) => theme.primary};
+    color: #fff;
+  }
   &:active { transform: scale(0.97); }
 `;
 
@@ -362,11 +409,8 @@ const Navbar = () => {
     <>
       <Nav $navPosition={navPosition}>
         <NavbarContainer>
-          {/* Logo */}
-          <NavLogo to="/">
-            {Bio.name.split(" ")[0]}
-            <span>.{Bio.name.split(" ")[1]?.[0]}</span>
-          </NavLogo>
+          {/* Spacer for centering */}
+          <Spacer />
 
           {/* Desktop links */}
           <NavItems>
@@ -396,31 +440,31 @@ const Navbar = () => {
               Github
             </GithubButton>
           </ButtonContainer>
-
-          {/* Mobile right icons */}
-          <MobileActions>
-            <ThemeToggleBtn onClick={handleThemeToggle} title="Toggle theme">
-              <IconSpan $spinning={spinning} onAnimationEnd={() => setSpinning(false)}>
-                {themeIcon}
-              </IconSpan>
-            </ThemeToggleBtn>
-            <HamburgerBtn
-              onClick={() => setIsOpen((p) => !p)}
-              aria-label={isOpen ? "Close menu" : "Open menu"}
-            >
-              {isOpen
-                ? <CloseRounded sx={{ fontSize: "26px" }} />
-                : <MenuRounded sx={{ fontSize: "26px" }} />}
-            </HamburgerBtn>
-          </MobileActions>
         </NavbarContainer>
       </Nav>
+
+      {/* Floating Action Buttons for Mobile */}
+      <FloatingActionGroup $isOpen={isOpen}>
+        <FAB onClick={handleThemeToggle} title="Toggle Theme">
+          <IconSpan $spinning={spinning} onAnimationEnd={() => setSpinning(false)}>
+            {themeIcon}
+          </IconSpan>
+        </FAB>
+        <FAB onClick={() => setIsOpen((p) => !p)} title="Menu">
+          {isOpen ? <CloseRounded sx={{ fontSize: "28px" }} /> : <MenuRounded sx={{ fontSize: "28px" }} />}
+        </FAB>
+      </FloatingActionGroup>
 
       {/* Mobile drawer + backdrop */}
       {isOpen && (
         <>
           <Backdrop onClick={close} />
           <MobileDrawer>
+            <DrawerHeader>
+              <CloseButton onClick={close} aria-label="Close Menu">
+                <CloseRounded sx={{ fontSize: "28px" }} />
+              </CloseButton>
+            </DrawerHeader>
             <DrawerNav>
               {NAV_LINKS.map(({ label, href, Icon, external }) => (
                 <DrawerLink
