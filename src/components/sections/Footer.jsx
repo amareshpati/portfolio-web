@@ -83,7 +83,6 @@ const Footer = () => {
   return (
     <FooterContainer>
       <FooterWrapper>
-        <Logo>Amaresh Pati</Logo>
         <Nav>
           <NavLink href="#About">About</NavLink>
           <NavLink href="#Skills">Skills</NavLink>
@@ -103,7 +102,7 @@ const Footer = () => {
             <Instagram />
           </SocialMediaIcon>
         </SocialMediaIcons>
-        <Copyright>&copy; {new Date().getFullYear()} Amaresh Pati. All rights reserved.</Copyright>
+        <Copyright>&copy; {new Date().getFullYear()} {Bio.name}. All rights reserved.</Copyright>
       </FooterWrapper>
     </FooterContainer>
   );

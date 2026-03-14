@@ -24,6 +24,7 @@ export const Bio = {
   insta: "https://www.instagram.com/amaresh_13/",
   // facebook: "https://www.facebook.com/rishav.chanda.165/",
   blogs: "https://blogs.devvloper.in",
+  email: "patiamaresh13@gmail.com",
 };
 
 export const skills = [
