@@ -8,20 +8,27 @@ import Navbar from "./components/Navbar";
 import SideNav from "./components/SideNav";
 import { BrowserRouter } from "react-router-dom";
 import Hero from "./components/sections/Hero";
-import Skills from "./components/sections/Skills";
+import CoreSkills from "./components/sections/CoreSkills";
 import Experience from "./components/sections/Experience";
 import Education from "./components/sections/Education";
 import Projects from "./components/sections/Projects";
 import BlogPreview from "./components/sections/BlogPreview";
+import Testimonials from "./components/sections/Testimonials";
 import Contact from "./components/sections/Contact";
 import Footer from "./components/sections/Footer";
 import ScrollToTop from "./components/ScrollToTop";
+import StarCanvas from "./components/canvas/Stars";
+import { Helmet, HelmetProvider } from "react-helmet-async";
+import { Bio } from "./data/constants";
 
 const Body = styled.div`
-  background-color: ${({ theme }) => theme.bg};
   width: 100%;
   overflow-x: hidden;
   position: relative;
+  padding-top: 60px;
+  @media screen and (max-width: 768px) {
+    padding-top: 0;
+  }
 `;
 
 const GlobalStyle = createGlobalStyle`
@@ -45,19 +52,32 @@ const GlobalStyle = createGlobalStyle`
   }
 
   /* ── iOS Safari safe-area fixes ──────────────────────────────── */
-  html, body {
-    /* Fills the full viewport including the notch & home indicator area */
+  html {
+    background-color: ${({ theme }) => theme.bg};
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+
+  body {
+    background-color: transparent;
     min-height: 100vh;
     min-height: -webkit-fill-available;
+    /* Clear any default browser padding/margin */
+    margin: 0;
+    padding: 0;
     /* Pad the very bottom so our content clears the home indicator */
     padding-bottom: env(safe-area-inset-bottom, 0px);
-    background-color: ${({ theme }) => theme.bg};
+    overflow-x: hidden;
   }
 
   #root {
+    background-color: transparent;
     min-height: 100vh;
     min-height: -webkit-fill-available;
-    background-color: ${({ theme }) => theme.bg};
+    margin: 0;
+    padding: 0;
   }
 `;
 
@@ -74,7 +94,6 @@ const Wrapper = styled.div`
       rgba(0, 70, 209, 0.15) 100%
     );
   width: 100%;
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 30% 98%, 0 100%);
 `;
 
 function getInitialDark() {
@@ -93,11 +112,23 @@ function getInitialNavPosition() {
   return "top";
 }
 
+
+
 function App() {
   const [isDark, setIsDark] = useState(getInitialDark);
   const [navPosition, setNavPosition] = useState(getInitialNavPosition);
 
   useEffect(() => {
+    // Handle /sendmail redirect
+    if (window.location.pathname === "/sendmail") {
+      window.location.href = `mailto:${Bio.email}?subject=Collaboration Request&body=Hi Amaresh,%0D%0A%0D%0A I saw your portfolio and would like to connect for...`;
+      
+      // Optionally redirect back after a short delay or just show home
+      setTimeout(() => {
+        window.history.replaceState({}, "", "/");
+      }, 100);
+    }
+
     localStorage.setItem("portfolio-theme", isDark ? "dark" : "light");
     localStorage.setItem("portfolio-nav-position", navPosition);
 
@@ -135,23 +166,38 @@ function App() {
   };
 
   return (
-    <NavContext.Provider value={{ navPosition, setNavPosition }}>
-      <ThemeContext.Provider value={{ isDark, toggleTheme }}>
-        <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
-          <BrowserRouter>
-            <GlobalStyle />
-            <Navbar />
-            <SideNav />
-            <Body>
-              <div>
-                <Hero />
-                <Wrapper>
-                  <Skills />
+    <HelmetProvider>
+      <Helmet>
+        <title>{`${Bio.name} | Full-Stack Developer & DevOps Engineer`}</title>
+        <meta name="title" content={`${Bio.name} | Full-Stack Developer & DevOps Engineer`} />
+        <meta name="description" content={Bio.description} />
+        <meta name="author" content={Bio.name} />
+        
+        <meta property="og:title" content={`${Bio.name} | Full-Stack Developer & DevOps Engineer`} />
+        <meta property="og:description" content={Bio.brandTagline} />
+        
+        <meta property="twitter:title" content={`${Bio.name} | Full-Stack Developer & DevOps Engineer`} />
+        <meta property="twitter:description" content={Bio.brandTagline} />
+      </Helmet>
+      <NavContext.Provider value={{ navPosition, setNavPosition }}>
+        <ThemeContext.Provider value={{ isDark, toggleTheme }}>
+          <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
+            <BrowserRouter>
+              <GlobalStyle />
+              <Navbar />
+              <SideNav />
+              <Body>
+                <StarCanvas />
+                <div>
+                  <Hero />
+                  <Wrapper>
+                  <CoreSkills />
                   <Experience />
                 </Wrapper>
                 <Projects />
                 <Wrapper>
                   <BlogPreview />
+                  <Testimonials />
                   <Education />
                   <Contact />
                 </Wrapper>
@@ -163,6 +209,7 @@ function App() {
         </ThemeProvider>
       </ThemeContext.Provider>
     </NavContext.Provider>
+    </HelmetProvider>
   );
 }
 

@@ -1,10 +1,9 @@
 import React from "react";
-import { VerticalTimeline } from "react-vertical-timeline-component";
-import "react-vertical-timeline-component/style.min.css";
 import styled from "styled-components";
 import { education } from "../../data/constants";
-import EducationCard from "../cards/EducationCard";
+import EducationManifest from "../cards/EducationManifest";
 import EarthCanvas from "../canvas/Earth";
+import { Terminal } from "@mui/icons-material";
 
 const Container = styled.div`
   display: flex;
@@ -13,6 +12,7 @@ const Container = styled.div`
   position: relative;
   z-index: 1;
   align-items: center;
+  padding: 80px 20px;
 `;
 
 const Wrapper = styled.div`
@@ -24,10 +24,8 @@ const Wrapper = styled.div`
   width: 100%;
   max-width: 1100px;
   gap: 12px;
-  @media (max-width: 960px) {
-    flex-direction: column;
-  }
 `;
+
 const Title = styled.div`
   font-size: 52px;
   text-align: center;
@@ -39,13 +37,49 @@ const Title = styled.div`
     font-size: 32px;
   }
 `;
+
 const Desc = styled.div`
   font-size: 18px;
   text-align: center;
-  font-weight: 600;
+  max-width: 700px;
   color: ${({ theme }) => theme.text_secondary};
+  margin-bottom: 60px;
   @media (max-width: 768px) {
     font-size: 16px;
+    margin-bottom: 40px;
+  }
+`;
+
+const ManifestList = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 40px;
+`;
+
+const InitHeader = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  font-family: 'Space Mono', monospace;
+  font-size: 14px;
+  color: ${({ theme }) => theme.primary};
+  opacity: 0.8;
+  
+  &::before {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, ${({ theme }) => theme.primary + "40"});
+  }
+  &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to left, transparent, ${({ theme }) => theme.primary + "40"});
   }
 `;
 
@@ -53,21 +87,27 @@ const Education = () => {
   return (
     <Container id="Education">
       <Wrapper>
-        <Title>Education</Title>
-        <Desc
-          style={{
-            marginBottom: "40px",
-          }}
-        >
-          My education has been a journey of self-discovery and growth. My
-          educational details are as follows.
+        <Title>Core Foundation</Title>
+        <Desc>
+          The architectural base layer of my technical expertise, initialized through 
+          verified academic curriculum and structural building blocks.
         </Desc>
 
-        <VerticalTimeline>
-          {education.map((education, index) => (
-            <EducationCard key={`education-${index}`} education={education} />
+        <InitHeader>
+          <Terminal style={{ fontSize: 18 }} />
+          LOAD_CORE_MODULES --initial
+        </InitHeader>
+
+        <ManifestList>
+          {education.map((item, index) => (
+            <EducationManifest 
+              key={`education-${index}`} 
+              education={item} 
+              index={index} 
+            />
           ))}
-        </VerticalTimeline>
+        </ManifestList>
+        
         <EarthCanvas />
       </Wrapper>
     </Container>

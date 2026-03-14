@@ -1,112 +1,161 @@
 import React, { useState } from "react";
 import styled, { keyframes, css } from "styled-components";
 import { useThemeToggle } from "../utils/ThemeContext";
-import { LightModeRounded, DarkModeRounded, GitHub, DashboardRounded } from "@mui/icons-material";
+import {
+  LightModeRounded,
+  DarkModeRounded,
+  GitHub,
+  DashboardRounded,
+  KeyboardArrowDownRounded,
+  FolderOpenRounded,
+  TerminalRounded,
+  SettingsRounded
+} from "@mui/icons-material";
 import { useNavContext } from "../utils/NavContext";
 import { useScrollSpy } from "../hooks/useScrollSpy";
 import { NAV_LINKS } from "./Navbar";
 import { Bio } from "../data/constants";
 
-const spinOnce = keyframes`
-  from { transform: rotate(0deg) scale(1); }
-  50%  { transform: rotate(180deg) scale(1.2); }
-  to   { transform: rotate(360deg) scale(1); }
+const fadeIn = keyframes`
+  from { opacity: 0; transform: translateX(-10px); }
+  to   { opacity: 1; transform: translateX(0); }
 `;
 
-const SideNavContainer = styled.nav`
+const SideNavContainer = styled.aside`
   position: fixed;
-  ${({ $navPosition }) => ($navPosition === "right" ? "right: 30px;" : "left: 30px;")}
-  top: 50%;
-  transform: translateY(-50%);
+  ${({ $navPosition }) => ($navPosition === "right" ? "right: 0;" : "left: 0;")}
+  top: 60px; /* Below Navbar */
+  bottom: 0;
+  width: 260px;
+  background: ${({ theme }) => theme.card + "f2"};
+  backdrop-filter: blur(12px);
+  border-right: 1px solid ${({ theme }) => theme.text_secondary + "15"};
+  border-left: ${({ $navPosition, theme }) => $navPosition === "right" ? `1px solid ${theme.text_secondary + "15"}` : "none"};
   display: ${({ $navPosition }) => ($navPosition === "top" ? "none" : "flex")};
   flex-direction: column;
-  gap: 20px;
-  z-index: 1000;
+  z-index: 999;
+  animation: ${fadeIn} 0.5s ease-out;
 
   @media screen and (max-width: 1600px) {
     display: none;
   }
 `;
 
+const ExplorerHeader = styled.div`
+  padding: 12px 16px;
+  font-size: 11px;
+  font-weight: 700;
+  color: ${({ theme }) => theme.text_secondary};
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const ProjectFolder = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  color: ${({ theme }) => theme.text_primary};
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  background: ${({ theme }) => theme.text_secondary + "05"};
+  
+  svg { font-size: 16px; color: ${({ theme }) => theme.primary}; }
+`;
+
+const NavList = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 4px 0;
+`;
+
 const NavItem = styled.a`
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 10px;
+  padding: 6px 16px 6px 32px;
   color: ${({ theme, $isActive }) =>
-    $isActive ? theme.primary : theme.text_primary + "99"};
-  font-size: ${({ $isActive }) => ($isActive ? "28px" : "24px")};
-  font-weight: ${({ $isActive }) => ($isActive ? "600" : "400")};
+    $isActive ? theme.primary : theme.text_secondary};
+  background: ${({ $isActive, theme }) => $isActive ? theme.primary + "10" : "transparent"};
+  font-size: 13px;
+  font-family: 'Space Mono', monospace;
   text-decoration: none;
-  transition: all 0.3s ease-out;
-  cursor: pointer;
+  transition: all 0.2s ease;
+  border-left: 2px solid ${({ $isActive, theme }) => $isActive ? theme.primary : "transparent"};
 
-  &:hover {
-    color: ${({ theme }) => theme.primary};
-    transform: translateX(5px);
+  svg { 
+    font-size: 18px; 
+    color: ${({ theme, $isActive }) => $isActive ? theme.primary : theme.text_secondary};
+    opacity: 0.7;
   }
 
+  .ext {
+    opacity: 0.4;
+    font-size: 11px;
+    margin-left: auto;
+  }
+
+  &:hover {
+    background: ${({ theme }) => theme.text_secondary + "10"};
+    color: ${({ theme }) => theme.text_primary};
+    svg { opacity: 1; }
+  }
 `;
 
-const ActionsContainer = styled.div`
+const ExplorerFooter = styled.div`
+  padding: 12px;
+  background: ${({ theme }) => theme.bgLight + "80"};
+  border-top: 1px solid ${({ theme }) => theme.text_secondary + "15"};
   display: flex;
-  flex-direction: row;
   align-items: center;
-  gap: 15px;
-  margin-top: 10px;
-  padding-top: 20px;
-  border-top: 1px solid ${({ theme }) => theme.primary + "33"};
+  gap: 8px;
 `;
 
-const ActionButton = styled.a`
+const ActionIcon = styled.button`
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  background: ${({ theme }) => theme.card_light};
-  color: ${({ theme }) => theme.primary};
-  border: 1px solid ${({ theme }) => theme.primary + "44"};
-  text-decoration: none;
-  transition: all 0.2s ease;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: ${({ theme }) => theme.text_secondary};
   cursor: pointer;
+  transition: all 0.2s;
 
   &:hover {
-    background: ${({ theme }) => theme.primary + "20"};
-    border-color: ${({ theme }) => theme.primary};
-    transform: scale(1.08);
+    background: ${({ theme }) => theme.text_secondary + "15"};
+    color: ${({ theme }) => theme.primary};
+    border-color: ${({ theme }) => theme.primary + "30"};
   }
-  &:active {
-    transform: scale(0.93);
-  }
+  
+  svg { font-size: 18px; }
 `;
 
-const GithubButton = styled.a`
-  border: 1.5px solid ${({ theme }) => theme.primary};
-  color: ${({ theme }) => theme.primary};
+const GitStatus = styled.a`
+  margin-left: auto;
   display: flex;
   align-items: center;
-  gap: 7px;
-  border-radius: 20px;
-  cursor: pointer;
-  padding: 8px 18px;
-  font-size: 14px;
-  font-weight: 600;
+  gap: 6px;
+  padding: 4px 10px;
+  background: ${({ theme }) => theme.primary};
+  color: white;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
   text-decoration: none;
-  transition: all 0.25s ease;
-  white-space: nowrap;
+  transition: all 0.2s;
 
   &:hover {
-    background: ${({ theme }) => theme.primary};
-    color: #fff;
+    filter: brightness(1.1);
+    transform: translateY(-1px);
   }
-`;
-
-const IconSpan = styled.span`
-  display: inline-flex;
-  ${({ $spinning }) =>
-    $spinning &&
-    css`animation: ${spinOnce} 0.45s ease forwards;`}
 `;
 
 const SideNav = () => {
@@ -131,44 +180,60 @@ const SideNav = () => {
     setSpinning(true);
   };
 
-  const themeIcon = isDark ? (
-    <LightModeRounded sx={{ fontSize: "22px" }} />
-  ) : (
-    <DarkModeRounded sx={{ fontSize: "22px" }} />
-  );
+  const themeIcon = isDark ? <LightModeRounded /> : <DarkModeRounded />;
 
   return (
     <SideNavContainer $navPosition={navPosition}>
-      {NAV_LINKS.map(({ label, href, external }) => {
-        // Evaluate if link is currently active
-        const isActive = activeSection === href;
+      <ExplorerHeader>
+        EXPLORER
+        <SettingsRounded sx={{ fontSize: 14 }} />
+      </ExplorerHeader>
 
-        return (
-          <NavItem
-            key={label}
-            href={external ? Bio.blogs : href}
-            $isActive={isActive}
-            {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-          >
-            {label}
-          </NavItem>
-        );
-      })}
+      <ProjectFolder>
+        <KeyboardArrowDownRounded />
+        <FolderOpenRounded />
+        PORTFOLIO-APP
+      </ProjectFolder>
 
-      <ActionsContainer>
-        <ActionButton as="button" onClick={handleNavToggle} title={`Current Layout: ${navPosition}`}>
-          <DashboardRounded sx={{ fontSize: "22px" }} />
-        </ActionButton>
-        <ActionButton as="button" onClick={handleThemeToggle} title="Toggle theme">
-          <IconSpan $spinning={spinning} onAnimationEnd={() => setSpinning(false)}>
-            {themeIcon}
-          </IconSpan>
-        </ActionButton>
-        <GithubButton href={Bio.github} target="_blank" rel="noopener noreferrer" title="GitHub">
-          <GitHub sx={{ fontSize: "17px" }} />
-          Github
-        </GithubButton>
-      </ActionsContainer>
+      <NavList>
+        <div style={{ padding: '4px 16px 4px 24px', fontSize: '11px', color: '#8b949e', fontWeight: 600 }}>
+          <KeyboardArrowDownRounded sx={{ fontSize: 14, verticalAlign: 'middle' }} /> src
+        </div>
+
+        {NAV_LINKS.map(({ label, href, Icon, ext, external }) => {
+          const isActive = activeSection === href || (activeSection === "" && href === "#About");
+
+          return (
+            <NavItem
+              key={label}
+              href={external ? Bio.blogs : href}
+              $isActive={isActive}
+              {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+            >
+              <Icon />
+              {label}
+              <span className="ext">{ext}</span>
+            </NavItem>
+          );
+        })}
+      </NavList>
+
+      <ExplorerFooter>
+        <ActionIcon onClick={handleNavToggle} title="Switch Layout">
+          <DashboardRounded />
+        </ActionIcon>
+        <ActionIcon onClick={handleThemeToggle} title="Toggle Theme">
+          {themeIcon}
+        </ActionIcon>
+        <ActionIcon as="a" href={Bio.github} target="_blank" title="Terminal">
+          <TerminalRounded />
+        </ActionIcon>
+
+        <GitStatus href={Bio.github} target="_blank">
+          <GitHub sx={{ fontSize: 14 }} />
+          SYNC
+        </GitStatus>
+      </ExplorerFooter>
     </SideNavContainer>
   );
 };

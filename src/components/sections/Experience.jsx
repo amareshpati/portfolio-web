@@ -1,18 +1,19 @@
 import React from "react";
-import { VerticalTimeline } from "react-vertical-timeline-component";
-import "react-vertical-timeline-component/style.min.css";
 import styled from "styled-components";
 import { experiences } from "../../data/constants";
-import ExperienceCard from "../cards/ExperienceCard";
+import ExperienceLog from "../cards/ExperienceLog";
+import { 
+  Dns 
+} from "@mui/icons-material";
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 50px;
   position: relative;
   z-index: 1;
   align-items: center;
+  padding: 80px 20px;
 `;
 
 const Wrapper = styled.div`
@@ -22,12 +23,10 @@ const Wrapper = styled.div`
   align-items: center;
   flex-direction: column;
   width: 100%;
-  max-width: 1100px;
+  max-width: 1000px;
   gap: 12px;
-  @media (max-width: 960px) {
-    flex-direction: column;
-  }
 `;
+
 const Title = styled.div`
   font-size: 52px;
   text-align: center;
@@ -39,38 +38,66 @@ const Title = styled.div`
     font-size: 32px;
   }
 `;
+
 const Desc = styled.div`
   font-size: 18px;
   text-align: center;
-  font-weight: 600;
+  max-width: 600px;
   color: ${({ theme }) => theme.text_secondary};
+  margin-bottom: 60px;
   @media (max-width: 768px) {
     font-size: 16px;
+    margin-bottom: 40px;
   }
+`;
+
+const LogStream = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+`;
+
+const TerminalHeader = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 32px;
+  padding: 12px 20px;
+  background: ${({ theme }) => theme.card + "80"};
+  border: 1px solid ${({ theme }) => theme.text_secondary + 20};
+  border-radius: 8px;
+  font-family: 'Space Mono', monospace;
+  font-size: 14px;
+  color: ${({ theme }) => theme.text_secondary};
 `;
 
 const Experience = () => {
   return (
     <Container id="Experience">
       <Wrapper>
-        <Title>Experience</Title>
-        <Desc
-          style={{
-            marginBottom: "40px",
-          }}
-        >
-          My work experience as a software engineer and working on different
-          companies and projects.
+        <Title>Deployment History</Title>
+        <Desc>
+          A chronological stream of system deployments and role transitions 
+          across my professional career pipeline.
         </Desc>
 
-        <VerticalTimeline>
+        <TerminalHeader>
+          <Dns style={{ fontSize: 18 }} />
+          <span>system_admin@portfolio: ~ /career_logs --list-all</span>
+        </TerminalHeader>
+
+        <LogStream>
           {experiences.map((experience, index) => (
-            <ExperienceCard
+            <ExperienceLog
               key={`experience-${index}`}
               experience={experience}
+              index={index}
+              total={experiences.length}
             />
           ))}
-        </VerticalTimeline>
+        </LogStream>
       </Wrapper>
     </Container>
   );
