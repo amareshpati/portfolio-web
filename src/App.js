@@ -10,6 +10,7 @@ import Skills from "./components/sections/Skills";
 import Experience from "./components/sections/Experience";
 import Education from "./components/sections/Education";
 import Projects from "./components/sections/Projects";
+import BlogPreview from "./components/sections/BlogPreview";
 import Contact from "./components/sections/Contact";
 import Footer from "./components/sections/Footer";
 import ScrollToTop from "./components/ScrollToTop";
@@ -134,6 +135,7 @@ function App() {
               </Wrapper>
               <Projects />
               <Wrapper>
+                <BlogPreview />
                 <Education />
                 <Contact />
               </Wrapper>
