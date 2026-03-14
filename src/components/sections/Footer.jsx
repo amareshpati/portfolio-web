@@ -89,7 +89,7 @@ const Footer = () => {
           <NavLink href="#Experience">Experience</NavLink>
           <NavLink href="#Projects">Projects</NavLink>
           <NavLink href="#Education">Education</NavLink>
-          <NavLink href={Bio.blogs} target="_blank" rel="noopener noreferrer">Blogs</NavLink>
+          <NavLink href="#Blog">Blog</NavLink>
         </Nav>
         <SocialMediaIcons>
           <SocialMediaIcon href={Bio.github} target="display">
