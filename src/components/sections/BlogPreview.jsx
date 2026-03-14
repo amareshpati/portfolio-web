@@ -1,10 +1,9 @@
-import React from "react";
 import styled from "styled-components";
 import { Bio } from "../../data/constants";
-import BlogImg from "../../images/blog_preview.png";
 import { Tilt } from "react-tilt";
 import { motion } from "framer-motion";
-import { headContentAnimation, headTextAnimation } from "../../utils/motion";
+import { headTextAnimation } from "../../utils/motion";
+import { OpenInNew } from "@mui/icons-material";
 
 const Container = styled.div`
   display: flex;
@@ -55,13 +54,15 @@ const ContentSection = styled.div`
 `;
 
 const ImageSection = styled.div`
-  flex: 1;
+  flex: 1.5;
   display: flex;
   justify-content: flex-end;
+  position: relative;
 
   @media (max-width: 960px) {
     justify-content: center;
     width: 100%;
+    flex: 1;
   }
 `;
 
@@ -93,15 +94,52 @@ const Desc = styled.div`
   }
 `;
 
-const StyledImage = styled.img`
+const IframeContainer = styled.div`
   width: 100%;
-  max-width: 500px;
+  max-width: 700px;
+  height: 400px;
   border-radius: 12px;
+  overflow: hidden;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
   border: 1px solid ${({ theme }) => theme.primary + 50};
+  background: white;
+  position: relative;
 
   @media (max-width: 960px) {
     max-width: 100%;
+    height: 300px;
+  }
+`;
+
+const StyledIframe = styled.iframe`
+  width: 200%; /* Double the width */
+  height: 200%; /* Double the height */
+  border: none;
+  transform: scale(0.5); /* Scale back to fit */
+  transform-origin: 0 0;
+`;
+
+const ExternalLinkIcon = styled.a`
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 10;
+  background: ${({ theme }) => theme.card + "CC"};
+  color: ${({ theme }) => theme.text_primary};
+  padding: 8px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(4px);
+  border: 1px solid ${({ theme }) => theme.primary + 33};
+
+  &:hover {
+    background: ${({ theme }) => theme.primary};
+    color: white;
+    transform: scale(1.1);
   }
 `;
 
@@ -168,7 +206,21 @@ const BlogPreview = () => {
                 "max-glare": 0.2
               }}
             >
-              <StyledImage src={BlogImg} alt="Blog Preview" />
+              <IframeContainer>
+                <ExternalLinkIcon
+                  href={Bio.blogs}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="Open in next tab"
+                >
+                  <OpenInNew sx={{ fontSize: 20 }} />
+                </ExternalLinkIcon>
+                <StyledIframe
+                  src={Bio.blogs}
+                  title="Blog Preview"
+                  loading="lazy"
+                />
+              </IframeContainer>
             </Tilt>
           </ImageSection>
         </Wrapper>
