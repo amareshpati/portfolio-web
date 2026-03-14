@@ -39,13 +39,29 @@ const PinnedBadge = styled.div`
   align-self: flex-start;
 `;
 
-const Image = styled.img`
+const ImageContainer = styled.div`
   width: 100%;
   height: 180px;
-  object-fit: cover;
-  background-color: ${({ theme }) => theme.white};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: ${({ theme }) => theme.card_light + "50"};
   border-radius: 10px;
-  box-shadow: 0 0 12px 2px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  box-shadow: 0 0 12px 2px rgba(0, 0, 0, 0.15);
+`;
+
+const Image = styled.img`
+  width: ${({ type }) => (type === "round" ? "130px" : "100%")};
+  height: ${({ type }) => (type === "round" ? "130px" : "100%")};
+  object-fit: ${({ type }) => (type === "round" ? "contain" : "cover")};
+  background-color: ${({ theme, type }) => (type === "round" ? "transparent" : theme.white)};
+  border-radius: ${({ type }) => (type === "round" ? "50%" : "10px")};
+  transition: transform 0.4s ease;
+  
+  &:hover {
+    transform: ${({ type }) => (type === "round" ? "scale(1.05)" : "none")};
+  }
 `;
 
 const Details = styled.div`
@@ -175,7 +191,9 @@ const ProjectCard = ({ project, pinned }) => {
   return (
     <Card>
       {pinned && <PinnedBadge>📌 Pinned</PinnedBadge>}
-      <Image src={project.image} alt={project.title} />
+      <ImageContainer>
+        <Image src={project.image} alt={project.title} type={project.imageType} />
+      </ImageContainer>
       <Details>
         <Title>{project.title}</Title>
         <DescriptionContainer expanded={expanded}>

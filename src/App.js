@@ -3,13 +3,16 @@ import { flushSync } from "react-dom";
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
 import { darkTheme, lightTheme } from "./utils/Themes";
 import { ThemeContext } from "./utils/ThemeContext";
+import { NavContext } from "./utils/NavContext";
 import Navbar from "./components/Navbar";
+import SideNav from "./components/SideNav";
 import { BrowserRouter } from "react-router-dom";
 import Hero from "./components/sections/Hero";
 import Skills from "./components/sections/Skills";
 import Experience from "./components/sections/Experience";
 import Education from "./components/sections/Education";
 import Projects from "./components/sections/Projects";
+import BlogPreview from "./components/sections/BlogPreview";
 import Contact from "./components/sections/Contact";
 import Footer from "./components/sections/Footer";
 import ScrollToTop from "./components/ScrollToTop";
@@ -80,11 +83,23 @@ function getInitialDark() {
   return window.matchMedia("(prefers-color-scheme: dark)").matches;
 }
 
+function getInitialNavPosition() {
+  const saved = localStorage.getItem("portfolio-nav-position");
+  if (saved !== null) return saved;
+  // If undefined/server-side, default to top. Otherwise check if side nav is visible based on breakpoint.
+  if (typeof window !== "undefined" && window.innerWidth > 1600) {
+    return "left";
+  }
+  return "top";
+}
+
 function App() {
   const [isDark, setIsDark] = useState(getInitialDark);
+  const [navPosition, setNavPosition] = useState(getInitialNavPosition);
 
   useEffect(() => {
     localStorage.setItem("portfolio-theme", isDark ? "dark" : "light");
+    localStorage.setItem("portfolio-nav-position", navPosition);
 
     // Sync browser status bar / address bar color with our theme
     const color = isDark ? darkTheme.bg : lightTheme.bg;
@@ -97,7 +112,7 @@ function App() {
       document.head.appendChild(meta);
     }
     meta.content = color;
-  }, [isDark]);
+  }, [isDark, navPosition]);
 
   const toggleTheme = (x, y) => {
     // Set the CSS vars for the ripple origin (default: screen centre)
@@ -120,30 +135,34 @@ function App() {
   };
 
   return (
-    <ThemeContext.Provider value={{ isDark, toggleTheme }}>
-      <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
-        <BrowserRouter>
-          <GlobalStyle />
-          <Navbar />
-          <Body>
-            <div>
-              <Hero />
-              <Wrapper>
-                <Skills />
-                <Experience />
-              </Wrapper>
-              <Projects />
-              <Wrapper>
-                <Education />
-                <Contact />
-              </Wrapper>
-              <Footer />
-              <ScrollToTop />
-            </div>
-          </Body>
-        </BrowserRouter>
-      </ThemeProvider>
-    </ThemeContext.Provider>
+    <NavContext.Provider value={{ navPosition, setNavPosition }}>
+      <ThemeContext.Provider value={{ isDark, toggleTheme }}>
+        <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
+          <BrowserRouter>
+            <GlobalStyle />
+            <Navbar />
+            <SideNav />
+            <Body>
+              <div>
+                <Hero />
+                <Wrapper>
+                  <Skills />
+                  <Experience />
+                </Wrapper>
+                <Projects />
+                <Wrapper>
+                  <BlogPreview />
+                  <Education />
+                  <Contact />
+                </Wrapper>
+                <Footer />
+                <ScrollToTop />
+              </div>
+            </Body>
+          </BrowserRouter>
+        </ThemeProvider>
+      </ThemeContext.Provider>
+    </NavContext.Provider>
   );
 }
 

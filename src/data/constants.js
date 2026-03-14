@@ -24,6 +24,7 @@ export const Bio = {
   insta: "https://www.instagram.com/amaresh_13/",
   // facebook: "https://www.facebook.com/rishav.chanda.165/",
   blogs: "https://blogs.devvloper.in",
+  email: "patiamaresh13@gmail.com",
 };
 
 export const skills = [
@@ -212,6 +213,7 @@ export const projects = [
       "Integrated reminders, document handling, and account-level protections across platforms."
     ],
     image: coverSure, // replace with local asset
+    imageType: "round",
     tags: ["React Native", "Insurance", "Notifications", "iOS", "Android"],
     category: "Mobile app",
     github: "",
@@ -231,6 +233,7 @@ export const projects = [
       "Focused on snappy list rendering and safe background tasks for reminders and updates."
     ],
     image: smylee,
+    imageType: "round",
     tags: ["React Native", "Events", "Push Notifications", "iOS", "Android"],
     category: "Mobile app",
     github: "",
@@ -250,6 +253,7 @@ export const projects = [
       "Delivered core RN features and performance optimizations for smooth live event experiences."
     ],
     image: ea,
+    imageType: "round",
     tags: ["React Native", "Live Results", "Sports", "Push Notifications"],
     category: "Mobile app",
     github: "",
@@ -270,6 +274,7 @@ export const projects = [
       "Real-time tracking and booking features for seamless ambulance dispatch."
     ],
     image: "https://img.freepik.com/free-vector/app-development-banner_33099-1720.jpg",
+    imageType: "rectangular",
     tags: ["React Native", "Emergency", "Healthcare", "Android"],
     category: "Mobile app",
     github: "",
@@ -289,6 +294,7 @@ export const projects = [
       "Enables knowledge sharing between professionals and users in real time."
     ],
     image: "https://img.freepik.com/free-vector/app-development-banner_33099-1720.jpg",
+    imageType: "rectangular",
     tags: ["React Native", "iOS", "Q&A", "Consultation"],
     category: "Mobile app",
     github: "",
@@ -310,6 +316,7 @@ export const projects = [
       "Built with TypeScript and HTML; supports daily sending limits and scheduling."
     ],
     image: "https://img.freepik.com/free-vector/hand-drawn-web-developers_23-2148819604.jpg?semt=ais_hybrid",
+    imageType: "rectangular",
     tags: ["TypeScript", "Node.js", "Gemini AI", "Automation", "Email"],
     category: "web app",
     github: "https://github.com/amareshpati/ai-mail-bot",
@@ -334,6 +341,7 @@ export const projects = [
       "Optimized for both Android and iOS platforms using React Native."
     ],
     image: "https://img.freepik.com/free-vector/app-development-banner_33099-1720.jpg",
+    imageType: "rectangular",
     tags: ["React Native", "Redux"],
     category: "Mobile app",
     github: "",
@@ -360,6 +368,7 @@ export const projects = [
       "Supports both individual and bundle subscription purchases."
     ],
     image: "https://img.freepik.com/free-vector/app-development-banner_33099-1720.jpg",
+    imageType: "rectangular",
     tags: ["React Native", "Redux", "Razorpay", "Firebase"],
     category: "Mobile app",
     github: "",
@@ -386,6 +395,7 @@ export const projects = [
       "Designed for easy navigation and user-friendly interface for all user types."
     ],
     image: "https://img.freepik.com/free-vector/app-development-banner_33099-1720.jpg",
+    imageType: "rectangular",
     tags: ["React Native", "Redux", "Firebase", "iOS", "Graph QL"],
     category: "Mobile app",
     github: "",
@@ -411,6 +421,7 @@ export const projects = [
       "Optimized for user-friendly navigation and ease of use."
     ],
     image: "https://img.freepik.com/free-vector/app-development-banner_33099-1720.jpg",
+    imageType: "rectangular",
     tags: ["React Native", "Text-to-Speech", "Multilingual"],
     category: "Mobile app",
     github: "",
@@ -435,6 +446,7 @@ export const projects = [
       "Optimized for efficient gym operations and inventory tracking."
     ],
     image: "https://img.freepik.com/free-vector/app-development-banner_33099-1720.jpg",
+    imageType: "rectangular",
     tags: ["Flutter", "Firebase", "Cross-Platform"],
     category: "Mobile app",
     github: "",
@@ -458,6 +470,7 @@ export const projects = [
       "Designed a user-friendly interface for seamless navigation and data access."
     ],
     image: "https://img.freepik.com/free-vector/app-development-banner_33099-1720.jpg",
+    imageType: "rectangular",
     tags: ["Flutter", "Backend Development", "Inventory Management"],
     category: "Mobile app",
     github: "",
@@ -481,6 +494,7 @@ export const projects = [
       "Designed for real-time monitoring of attendance data."
     ],
     image: "https://img.freepik.com/free-vector/app-development-banner_33099-1720.jpg",
+    imageType: "rectangular",
     tags: ["Flutter", "Geofencing", "Attendance Tracking"],
     category: "Mobile app",
     github: "",
@@ -504,6 +518,7 @@ export const projects = [
       "Optimized for fast and efficient payment processing."
     ],
     image: "https://img.freepik.com/free-vector/app-development-banner_33099-1720.jpg",
+    imageType: "rectangular",
     tags: ["React Native", "Reanimated", "Paytm Payment Gateway"],
     category: "Mobile app",
     github: "",
@@ -529,6 +544,7 @@ export const projects = [
       "Led the project management, ensuring timely delivery and coordination across all teams."
     ],
     image: "https://acropolium.com/img/articles/find-backend-developers/img01.jpg",
+    imageType: "rectangular",
     tags: [
       "React Native",
       "Native Android",
@@ -559,6 +575,7 @@ export const projects = [
       "Designed the system to streamline learning processes and performance analysis."
     ],
     image: "https://img.freepik.com/free-vector/hand-drawn-web-developers_23-2148819604.jpg?semt=ais_hybrid",
+    imageType: "rectangular",
     tags: ["MongoDB", "MySQL", "Express.js", "React Native", "Backend Development"],
     category: ["Mobile app", "backend"],
     github: "",
@@ -582,6 +599,7 @@ export const projects = [
       "Provided features to browse, book, and manage events effortlessly."
     ],
     image: "https://img.freepik.com/free-vector/hand-drawn-web-developers_23-2148819604.jpg?semt=ais_hybrid",
+    imageType: "rectangular",
     tags: ["React Native", "Express.js", "MS SQL", "AWS", "Backend Deployment"],
     category: ["Mobile app", "web app", "backend"],
     github: "",
@@ -605,6 +623,7 @@ export const projects = [
       "The app facilitates efficient communication and collaboration between teachers and students."
     ],
     image: "https://img.freepik.com/free-vector/hand-drawn-web-developers_23-2148819604.jpg?semt=ais_hybrid",
+    imageType: "rectangular",
     tags: ["React Native", "Firebase", "Real-Time Communication"],
     category: ["Mobile app", "web app", "backend"],
     github: "",
@@ -628,6 +647,7 @@ export const projects = [
       "Provides a seamless way to monitor and control IoT sensors through a user-friendly interface."
     ],
     image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLtMS8qiUFvwKVi8C4JrdWm9dOwiZvnwynzA&s",
+    imageType: "rectangular",
     tags: ["Express.js", "MQTT", "AWS", "WebSocket", "IoT Integration"],
     category: "backend",
     github: "",
@@ -652,6 +672,7 @@ export const projects = [
       "Deployed the app on the Play Store and managed backend deployment on AWS."
     ],
     image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLtMS8qiUFvwKVi8C4JrdWm9dOwiZvnwynzA&s",
+    imageType: "rectangular",
     tags: ["IoT", "AWS", "Play Store", "Sensor Data", "Live Camera"],
     category: "backend",
     github: "",
@@ -675,6 +696,7 @@ export const projects = [
       "The site serves as an informative platform for users, offering structured and easy-to-access content."
     ],
     image: "https://media.istockphoto.com/id/1371339413/photo/co-working-team-meeting-concept-businessman-using-smart-phone-and-digital-tablet-and-laptop.jpg?s=612x612&w=0&k=20&c=ysEsVw3q2axYt3oVZAuQjtHRlN3lY-U_e0ikK5yKIXQ=",
+    imageType: "rectangular",
     tags: ["Next.js", "Tailwind CSS", "Web Development"],
     category: "web app",
     github: "",
