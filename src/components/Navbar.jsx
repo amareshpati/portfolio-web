@@ -14,8 +14,10 @@ import {
   SchoolRounded,
   ArticleRounded,
   GitHub,
+  DashboardRounded,
 } from "@mui/icons-material";
 import { useThemeToggle } from "../utils/ThemeContext";
+import { useNavContext } from "../utils/NavContext";
 
 /* ─── Animations ──────────────────────────────────────────────── */
 const slideDown = keyframes`
@@ -50,6 +52,10 @@ const Nav = styled.div`
   border-bottom: 1px solid ${({ theme }) => theme.primary + "22"};
   color: ${({ theme }) => theme.text_primary};
   transition: background 0.3s ease;
+
+  @media screen and (min-width: 1600px) {
+    display: ${({ $navPosition }) => ($navPosition === "top" ? "flex" : "none")};
+  }
 `;
 
 const NavbarContainer = styled.div`
@@ -171,6 +177,12 @@ const ThemeToggleBtn = styled.button`
     transform: scale(1.08);
   }
   &:active { transform: scale(0.93); }
+`;
+
+const NavToggleBtn = styled(ThemeToggleBtn)`
+  @media screen and (max-width: 1600px) {
+    display: none;
+  }
 `;
 
 const IconSpan = styled.span`
@@ -302,7 +314,7 @@ const DrawerGithubBtn = styled.a`
 `;
 
 /* ─── Nav links config ────────────────────────────────────────── */
-const NAV_LINKS = [
+export const NAV_LINKS = [
   { label: "About", href: "#About", Icon: HomeRounded },
   { label: "Skills", href: "#Skills", Icon: BuildRounded },
   { label: "Experience", href: "#Experience", Icon: WorkRounded },
@@ -316,6 +328,13 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [spinning, setSpinning] = useState(false);
   const { isDark, toggleTheme } = useThemeToggle();
+  const { navPosition, setNavPosition } = useNavContext();
+
+  const handleNavToggle = () => {
+    if (navPosition === 'top') setNavPosition('left');
+    else if (navPosition === 'left') setNavPosition('right');
+    else setNavPosition('top');
+  };
 
   // Close drawer on resize to desktop
   useEffect(() => {
@@ -341,7 +360,7 @@ const Navbar = () => {
 
   return (
     <>
-      <Nav>
+      <Nav $navPosition={navPosition}>
         <NavbarContainer>
           {/* Logo */}
           <NavLogo to="/">
@@ -364,6 +383,9 @@ const Navbar = () => {
 
           {/* Desktop right buttons */}
           <ButtonContainer>
+            <NavToggleBtn onClick={handleNavToggle} title={`Current Layout: ${navPosition}`}>
+              <DashboardRounded sx={{ fontSize: "20px" }} />
+            </NavToggleBtn>
             <ThemeToggleBtn onClick={handleThemeToggle} title="Toggle theme">
               <IconSpan $spinning={spinning} onAnimationEnd={() => setSpinning(false)}>
                 {themeIcon}
