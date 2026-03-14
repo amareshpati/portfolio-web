@@ -1,12 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { 
-  CheckCircle, 
-  ChatBubbleOutline, 
+import {
+  CheckCircle,
+  ChatBubbleOutline,
   ThumbUpAltOutlined,
   VerifiedUserOutlined,
-  MoreHoriz
 } from "@mui/icons-material";
 
 const ReviewCard = styled(motion.div)`
@@ -138,7 +137,7 @@ const PeerReview = ({ testimonial, index }) => {
           <CheckCircle style={{ fontSize: 14 }} /> Approved
         </ReviewStatus>
       </CardHeader>
-      
+
       <CardBody>
         <CommentQuote>
           {testimonial.desc}

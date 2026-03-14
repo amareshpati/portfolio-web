@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
-import { TerminalRounded, KeyboardDoubleArrowUpRounded } from "@mui/icons-material";
+import { KeyboardDoubleArrowUpRounded } from "@mui/icons-material";
 
 const blink = keyframes`
   50% { opacity: 0; }

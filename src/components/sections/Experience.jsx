@@ -3,8 +3,6 @@ import styled from "styled-components";
 import { experiences } from "../../data/constants";
 import ExperienceLog from "../cards/ExperienceLog";
 import { 
-  Terminal, 
-  TerminalOutlined,
   Dns 
 } from "@mui/icons-material";
 
