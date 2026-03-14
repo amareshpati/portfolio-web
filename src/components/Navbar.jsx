@@ -19,10 +19,6 @@ import { useThemeToggle } from "../utils/ThemeContext";
 import { useNavContext } from "../utils/NavContext";
 
 /* ─── Animations ──────────────────────────────────────────────── */
-const slideDown = keyframes`
-  from { opacity: 0; transform: translateY(-12px); }
-  to   { opacity: 1; transform: translateY(0); }
-`;
 
 const spinOnce = keyframes`
   from { transform: rotate(0deg) scale(1); }

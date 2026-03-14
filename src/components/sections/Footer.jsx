@@ -25,11 +25,6 @@ const FooterWrapper = styled.div`
   padding: 1rem;
   color: ${({ theme }) => theme.text_primary};
 `;
-const Logo = styled.div`
-  font-weight: 600;
-  font-size: 20px;
-  color: ${({ theme }) => theme.primary};
-`;
 const Nav = styled.ul`
   width: 100%;
   max-width: 800px;
