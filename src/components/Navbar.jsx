@@ -634,7 +634,7 @@ const Navbar = () => {
 
             <GithubStatus href={Bio.github} target="_blank" rel="noopener noreferrer">
               <GitHub sx={{ fontSize: 18 }} />
-              <span className="push">Sync</span>
+              <span className="push">Github</span>
             </GithubStatus>
           </StatusGroup>
         </NavbarContainer>
@@ -669,7 +669,7 @@ const Navbar = () => {
                 <CloseRounded sx={{ fontSize: 20 }} />
               </StatusButton>
             </DrawerHeader>
-            
+
             <GitGraphContainer>
               <GraphLine />
               {NAV_LINKS.map(({ label, href, hash, msg, external }) => (
@@ -694,12 +694,12 @@ const Navbar = () => {
             </GitGraphContainer>
 
             <div style={{ padding: '16px 24px 0' }}>
-              <GithubStatus 
-                href={Bio.github} 
-                target="_blank" 
-                style={{ 
-                  width: '100%', 
-                  justifyContent: 'center', 
+              <GithubStatus
+                href={Bio.github}
+                target="_blank"
+                style={{
+                  width: '100%',
+                  justifyContent: 'center',
                   marginLeft: 0,
                   fontFamily: 'Space Mono, monospace',
                   fontSize: '13px',

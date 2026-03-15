@@ -231,7 +231,7 @@ const SideNav = () => {
 
         <GitStatus href={Bio.github} target="_blank">
           <GitHub sx={{ fontSize: 14 }} />
-          SYNC
+          Github
         </GitStatus>
       </ExplorerFooter>
     </SideNavContainer>
