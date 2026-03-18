@@ -6,8 +6,7 @@ import {
   FolderOpen,
   Article,
   Launch,
-  History,
-  Label
+  History
 } from "@mui/icons-material";
 
 const Container = styled.div`
