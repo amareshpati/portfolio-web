@@ -58,6 +58,7 @@ const Nav = styled.div`
   border-bottom: 2px solid ${({ theme }) => theme.primary + "15"};
   color: ${({ theme }) => theme.text_primary};
   transition: background 0.3s ease;
+  overflow-x: hidden; /* Ensure no horizontal overflow */
 
   @media screen and (max-width: 768px) {
     display: none;
@@ -157,10 +158,10 @@ const TabLink = styled.a`
   .ext {
     opacity: 0.4;
     font-size: 11px;
-    @media screen and (max-width: 1200px) { display: none; }
+    @media screen and (max-width: 1300px) { display: none; }
   }
 
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 1150px) {
     padding: 0 10px;
     span.label { display: none; }
   }
@@ -267,7 +268,7 @@ const GithubStatus = styled.a`
     box-shadow: 0 6px 15px ${({ theme }) => theme.primary + "50"};
   }
 
-  @media screen and (max-width: 1100px) {
+  @media screen and (max-width: 1250px) {
     span.push { display: none; }
     padding: 6px 10px;
   }
@@ -346,32 +347,8 @@ const DrawerHeader = styled.div`
   margin-bottom: 12px;
 `;
 
-const ShellUser = styled.div`
-  font-family: 'Space Mono', monospace;
-  font-size: 14px;
-  color: #3fb950;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-`;
 
-const DrawerLink = styled.a`
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 14px 24px;
-  color: #c9d1d9;
-  font-family: 'Space Mono', monospace;
-  font-size: 15px;
-  text-decoration: none;
-  
-  svg { color: ${({ theme }) => theme.primary}; font-size: 20px; }
-  
-  &:active {
-    background: #161b22;
-    color: white;
-  }
-`;
+
 
 /* ─── Git Graph Components ───────────────────────────────────── */
 const GitGraphContainer = styled.div`
@@ -562,8 +539,8 @@ const Navbar = () => {
   const themeIcon = isDark ? <LightModeRounded /> : <DarkModeRounded />;
 
   // Determine which links to show in main tabs vs "More"
-  const visibleLinks = windowWidth < 1250 ? NAV_LINKS.slice(0, 4) : NAV_LINKS;
-  const moreLinks = windowWidth < 1250 ? NAV_LINKS.slice(4) : [];
+  const visibleLinks = windowWidth < 1350 ? NAV_LINKS.slice(0, 4) : NAV_LINKS;
+  const moreLinks = windowWidth < 1350 ? NAV_LINKS.slice(4) : [];
 
   return (
     <>

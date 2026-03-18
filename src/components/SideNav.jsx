@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import styled, { keyframes, css } from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { useThemeToggle } from "../utils/ThemeContext";
 import {
   LightModeRounded,
@@ -163,7 +162,7 @@ const SideNav = () => {
   const activeSection = useScrollSpy(sectionIds, 200);
   const { isDark, toggleTheme } = useThemeToggle();
   const { navPosition, setNavPosition } = useNavContext();
-  const [spinning, setSpinning] = useState(false);
+
 
   const handleNavToggle = () => {
     if (navPosition === 'top') setNavPosition('left');
@@ -177,7 +176,7 @@ const SideNav = () => {
       Math.round(rect.left + rect.width / 2),
       Math.round(rect.top + rect.height / 2)
     );
-    setSpinning(true);
+
   };
 
   const themeIcon = isDark ? <LightModeRounded /> : <DarkModeRounded />;

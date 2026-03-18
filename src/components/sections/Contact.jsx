@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Bio } from "../../data/constants";
+
 import { motion } from "framer-motion";
 import {
   Send,
@@ -194,7 +194,7 @@ const Contact = () => {
             </StatusIndicator>
 
             <CodeBlock>
-              <span className="comment">// Execute connection request</span><br />
+              <span className="comment">{"// Execute connection request"}</span><br />
               <span className="keyword">curl -L </span><span className="string">"https://devvloper.in/sendmail"</span>
             </CodeBlock>
 

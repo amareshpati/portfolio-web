@@ -123,76 +123,7 @@ const Earth = () => {
   );
 };
 
-const LogTerminal = styled.div`
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  background: rgba(9, 9, 23, 0.85);
-  border: 1px solid #854CE640;
-  border-left: 3px solid #4CAF50;
-  color: #b1b2b3;
-  padding: 12px 18px;
-  border-radius: 4px;
-  font-family: 'Space Mono', monospace;
-  font-size: 10px;
-  pointer-events: none;
-  z-index: 10;
-  backdrop-filter: blur(12px);
-  width: 280px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
 
-  .status {
-    color: #4CAF50;
-    margin-bottom: 6px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-weight: bold;
-    
-    &::after {
-      content: '';
-      width: 6px;
-      height: 6px;
-      background: #4CAF50;
-      border-radius: 50%;
-      box-shadow: 0 0 8px #4CAF50;
-      animation: blink 1s infinite;
-    }
-  }
-
-  .logs {
-    overflow: hidden;
-    height: 4.5em; /* Show 3 lines */
-    display: flex;
-    flex-direction: column-reverse;
-  }
-
-  .log-line {
-    opacity: 0.8;
-    margin-bottom: 2px;
-    &::before {
-      content: '>';
-      margin-right: 6px;
-      color: #854CE6;
-    }
-  }
-
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-  }
-`;
-
-const LOG_MESSAGES = [
-  "Initializing neural link...",
-  "Syncing metadata with origin...",
-  "Buffer stream established",
-  "Optimizing render pipeline...",
-  "Checksum: 0x854CE6 [OK]",
-  "Pushing build artifacts...",
-  "Deployment heartbeat active",
-  "Handshaking with edge node...",
-];
 
 
 const CanvasWrapper = styled.div`

@@ -247,45 +247,6 @@ export const education = [
 
 export const projects = [
   {
-    id: 17,
-    title: "CoverSure – Insurance Made Easy",
-    description: [
-      "Personalized insurance portfolio manager for health, life, and motor policies with renewals, gap detection, and emergency assistance.",
-      "Implemented RN performance improvements, critical purchase/renewal UX flows, and crash-rate reductions.",
-      "Integrated reminders, document handling, and account-level protections across platforms."
-    ],
-    image: coverSure, // replace with local asset
-    imageType: "round",
-    tags: ["React Native", "Insurance", "Notifications", "iOS", "Android"],
-    category: "Mobile app",
-    github: "",
-    webapp: "",
-    playStore: "https://play.google.com/store/apps/details?id=com.coversure&pcampaignid=web_share",
-    appStore: "https://apps.apple.com/in/app/coversure-insurance-made-easy/id6454847100",
-    overview: "All-in-one insurance app: manage policies, get renewal alerts, access assistance, and understand coverage.",
-    pinned: true,
-    member: [{ name: "", img: "", linkedin: "", github: "" }]
-  },
-  {
-    id: 16,
-    title: "Smylee – Plan Everyday Events",
-    description: [
-      "Event-planning app to organize meetups with group/personal chat, RSVP tracking, reminders, and charity-pledge commitment features.",
-      "Built and upgraded RN flows; stabilized new architecture and notifications pipeline across iOS/Android.",
-      "Focused on snappy list rendering and safe background tasks for reminders and updates."
-    ],
-    image: smylee,
-    imageType: "round",
-    tags: ["React Native", "Events", "Push Notifications", "iOS", "Android"],
-    category: "Mobile app",
-    github: "",
-    webapp: "https://play.google.com/store/apps/details?id=com.smylee.smyleeapp",
-    overview: "Plan parties and meetups with chat, RSVPs, reminders, and a unique charity-pledge mechanism.",
-    pinned: true,
-    member: [{ name: "", img: "", linkedin: "", github: "" }]
-  },
-
-  {
     id: 15,
     title: "European Athletics – Official App",
     description: [
@@ -306,7 +267,120 @@ export const projects = [
     pinned: true,
     member: [{ name: "", img: "", linkedin: "", github: "" }]
   },
-
+  {
+    id: 17,
+    title: "CoverSure – Insurance Made Easy",
+    description: [
+      "Personalized insurance portfolio manager for health, life, and motor policies with renewals, gap detection, and emergency assistance.",
+      "Implemented RN performance improvements, critical purchase/renewal UX flows, and crash-rate reductions.",
+      "Integrated reminders, document handling, and account-level protections across platforms."
+    ],
+    image: coverSure,
+    imageType: "round",
+    tags: ["React Native", "Insurance", "Notifications", "iOS", "Android"],
+    category: "Mobile app",
+    github: "",
+    webapp: "",
+    playStore: "https://play.google.com/store/apps/details?id=com.coversure&pcampaignid=web_share",
+    appStore: "https://apps.apple.com/in/app/coversure-insurance-made-easy/id6454847100",
+    overview: "All-in-one insurance app: manage policies, get renewal alerts, access assistance, and understand coverage.",
+    pinned: true,
+    member: [{ name: "", img: "", linkedin: "", github: "" }]
+  },
+  {
+    id: 25,
+    title: "Create RN Quickstart",
+    description: [
+      "CLI tool for instantly scaffolding React Native projects with best practices.",
+      "Simplifies the complex setup process of RN applications.",
+      "Provides a clean, modular architecture out of the box.",
+      "Enables developers to jump-start their mobile development workflow."
+    ],
+    image: "https://img.freepik.com/free-vector/hand-drawn-web-developers_23-2148819604.jpg?semt=ais_hybrid",
+    imageType: "rectangular",
+    tags: ["Node.js", "CLI Tool", "React Native", "Automation"],
+    category: "Web app",
+    github: "https://github.com/amareshpati/create-rn-quickstart",
+    webapp: "",
+    overview: "Command-line utility to bootstrap React Native projects quickly and efficiently.",
+    pinned: true,
+    member: [{ name: "", img: "", linkedin: "", github: "" }]
+  },
+  {
+    id: 20,
+    title: "AI Mail Bot",
+    description: [
+      "A smart tool to generate and auto-send personalized emails to recruiters using AI.",
+      "Powered by Google Gemini API for intelligent email generation tailored per recipient.",
+      "Upload a CSV with recruiter details and your resume — the bot drafts, queues, and sends emails automatically.",
+      "Web interface lets you review, edit, and approve emails before dispatching.",
+      "Built with TypeScript and HTML; supports daily sending limits and scheduling."
+    ],
+    image: "https://img.freepik.com/free-vector/hand-drawn-web-developers_23-2148819604.jpg?semt=ais_hybrid",
+    imageType: "rectangular",
+    tags: ["TypeScript", "Node.js", "Gemini AI", "Automation", "Email"],
+    category: "Backend",
+    github: "https://github.com/amareshpati/ai-mail-bot",
+    webapp: "",
+    playStore: "",
+    appStore: "",
+    overview: "AI-powered email bot that generates and auto-sends personalized recruiter outreach emails using Gemini API.",
+    pinned: true,
+    member: [{ name: "", img: "", linkedin: "", github: "" }]
+  },
+  {
+    id: 24,
+    title: "RN Boilerplate App",
+    description: [
+      "Professional-grade React Native boilerplate with a robust file structure.",
+      "Pre-configured with Redux, Navigation, and essential utility hooks.",
+      "Includes reusable UI components and standard styling patterns.",
+      "Designed to significantly reduce initial project setup time."
+    ],
+    image: "https://img.freepik.com/free-vector/app-development-banner_33099-1720.jpg",
+    imageType: "rectangular",
+    tags: ["React Native", "Boilerplate", "Redux", "Best Practices"],
+    category: "Mobile app",
+    github: "https://github.com/amareshpati/rn-boilerplate-app",
+    webapp: "",
+    overview: "A production-ready React Native starter template for rapid development.",
+    member: [{ name: "", img: "", linkedin: "", github: "" }]
+  },
+  {
+    id: 16,
+    title: "Smylee – Plan Everyday Events",
+    description: [
+      "Event-planning app to organize meetups with group/personal chat, RSVP tracking, reminders, and charity-pledge commitment features.",
+      "Built and upgraded RN flows; stabilized new architecture and notifications pipeline across iOS/Android.",
+      "Focused on snappy list rendering and safe background tasks for reminders and updates."
+    ],
+    image: smylee,
+    imageType: "round",
+    tags: ["React Native", "Events", "Push Notifications", "iOS", "Android"],
+    category: "Mobile app",
+    github: "",
+    webapp: "https://play.google.com/store/apps/details?id=com.smylee.smyleeapp",
+    overview: "Plan parties and meetups with chat, RSVPs, reminders, and a unique charity-pledge mechanism.",
+    member: [{ name: "", img: "", linkedin: "", github: "" }]
+  },
+  {
+    id: 12,
+    title: "IoT Device Connection App",
+    description: [
+      "Industrial IoT application developed at Clino Health for device monitoring.",
+      "Used Express.js and MQTT protocol over AWS for real-time communication.",
+      "Implemented WebSocket for low-latency sensor data fetching.",
+      "Successfully delivered multiple sub-projects within the IoT ecosystem."
+    ],
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLtMS8qiUFvwKVi8C4JrdWm9dOwiZvnwynzA&s",
+    imageType: "rectangular",
+    tags: ["Express.js", "MQTT", "AWS", "IoT", "WebSocket"],
+    category: "Backend",
+    github: "",
+    webapp: "",
+    overview: "Real-time IoT sensor monitoring system with MQTT and AWS.",
+    member: [{ name: "", img: "", linkedin: "", github: "" }]
+  },
   {
     id: 18,
     title: "Mo Ambulance – Emergency Booking",
@@ -326,7 +400,99 @@ export const projects = [
     overview: "Emergency ambulance booking app with real-time tracking for faster medical response.",
     member: [{ name: "", img: "", linkedin: "", github: "" }]
   },
-
+  {
+    id: 23,
+    title: "Mo Ambulance Website",
+    description: [
+      "Official informative and booking website for Mo Ambulance services.",
+      "Designed for quick access to emergency contact and booking info.",
+      "Responsive layout for ease of use on all device types during emergencies."
+    ],
+    image: "https://img.freepik.com/free-vector/hand-drawn-web-developers_23-2148819604.jpg?semt=ais_hybrid",
+    imageType: "rectangular",
+    tags: ["Web Development", "Healthcare", "Emergency"],
+    category: "Web app",
+    github: "",
+    webapp: "https://moambulance.in",
+    overview: "Official website for Mo Ambulance emergency services.",
+    member: [{ name: "", img: "", linkedin: "", github: "" }]
+  },
+  {
+    id: 13,
+    title: "IoT Sensor Data Website",
+    description: [
+      "Web-based dashboard for optimized showcasing of real-time sensor data.",
+      "Responsible for developing efficient algorithms to process and visualize data.",
+      "Integrated live camera feeds and sensor values for comprehensive monitoring.",
+      "Deployed on AWS with a focus on high-performance data visualization."
+    ],
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLtMS8qiUFvwKVi8C4JrdWm9dOwiZvnwynzA&s",
+    imageType: "rectangular",
+    tags: ["IoT", "Next.js", "AWS", "Data Visualization", "Live Camera"],
+    category: "Web app",
+    github: "",
+    webapp: "",
+    overview: "High-performance IoT dashboard for real-time sensor data and logic.",
+    member: [{ name: "", img: "", linkedin: "", github: "" }]
+  },
+  {
+    id: 10,
+    title: "Event Booking App",
+    description: [
+      "Freelance project for booking and managing events seamlessly.",
+      "Developed both mobile application and scalable backend.",
+      "Hosted on AWS for reliable performance and high availability.",
+      "Features include event browsing, booking, and real-time updates."
+    ],
+    image: "https://img.freepik.com/free-vector/hand-drawn-web-developers_23-2148819604.jpg?semt=ais_hybrid",
+    imageType: "rectangular",
+    tags: ["React Native", "Express.js", "AWS", "SQL Server"],
+    category: ["Mobile app", "Web app", "Backend"],
+    github: "",
+    webapp: "",
+    overview: "Complete event booking solution with AWS-hosted backend.",
+    member: [{ name: "", img: "", linkedin: "", github: "" }]
+  },
+  {
+    id: 8,
+    title: "Refab Emi Locker",
+    description: [
+      "An app designed for smartphone sellers offering self-financing options.",
+      "Allows sellers to control sold devices, including locking and stopping network access, when EMIs are unpaid.",
+      "Conducted extensive R&D to ensure smooth functionality and robust security.",
+      "Integrated Google Zero Touch Portal and Work Profile for seamless device management.",
+      "Managed a team to ensure timely delivery and coordination across platforms."
+    ],
+    image: "https://acropolium.com/img/articles/find-backend-developers/img01.jpg",
+    imageType: "rectangular",
+    tags: ["React Native", "Native Android", "Google Zero Touch", "Security"],
+    category: "Mobile app",
+    github: "",
+    webapp: "",
+    playStore: "https://play.google.com/store/apps/details?id=com.apptimate.rf",
+    appStore: "",
+    overview: "Remote device management and locking system for financed smartphones.",
+    member: [{ name: "", img: "", linkedin: "", github: "" }]
+  },
+  {
+    id: 21,
+    title: "Refab SalesForce App",
+    description: [
+      "Enterprise sales force automation tool for managing purchase orders and inventory.",
+      "Streamlines field sales operations with real-time data sync and reporting.",
+      "Supports multi-level user access and role-based permissions."
+    ],
+    image: "https://img.freepik.com/free-vector/app-development-banner_33099-1720.jpg",
+    imageType: "rectangular",
+    tags: ["React Native", "SalesForce", "Enterprise", "iOS", "Android"],
+    category: "Mobile app",
+    github: "",
+    webapp: "",
+    playStore: "https://play.google.com/store/apps/details?id=com.refab_po",
+    appStore: "https://apps.apple.com/in/app/refab-salesforces/id1663787287",
+    overview: "Sales force management app for tracking orders and sales activities.",
+    member: [{ name: "", img: "", linkedin: "", github: "" }]
+  },
   {
     id: 19,
     title: "Ask Hitech – Expert Q&A",
@@ -346,415 +512,43 @@ export const projects = [
     overview: "iOS app for expert consultations and tech Q&A, connecting professionals with users in real time.",
     member: [{ name: "", img: "", linkedin: "", github: "" }]
   },
-
   {
-    id: 20,
-    title: "AI Mail Bot",
+    id: 22,
+    title: "Refab Recharge App",
     description: [
-      "A smart tool to generate and auto-send personalized emails to recruiters using AI.",
-      "Powered by Google Gemini API for intelligent email generation tailored per recipient.",
-      "Upload a CSV with recruiter details and your resume — the bot drafts, queues, and sends emails automatically.",
-      "Web interface lets you review, edit, and approve emails before dispatching.",
-      "Built with TypeScript and HTML; supports daily sending limits and scheduling."
+      "Mobile recharge and utility bill payment application.",
+      "Integrated secure payment gateways for seamless transactions.",
+      "Provides real-time recharge status and transaction history."
     ],
-    image: "https://img.freepik.com/free-vector/hand-drawn-web-developers_23-2148819604.jpg?semt=ais_hybrid",
+    image: "https://img.freepik.com/free-vector/app-development-banner_33099-1720.jpg",
     imageType: "rectangular",
-    tags: ["TypeScript", "Node.js", "Gemini AI", "Automation", "Email"],
-    category: "web app",
-    github: "https://github.com/amareshpati/ai-mail-bot",
+    tags: ["React Native", "Fintech", "Recharge", "Android"],
+    category: "Mobile app",
+    github: "",
     webapp: "",
-    playStore: "",
+    playStore: "https://play.google.com/store/apps/details?id=com.therefab",
     appStore: "",
-    overview: "AI-powered email bot that generates and auto-sends personalized recruiter outreach emails using Gemini API.",
-    pinned: false,
+    overview: "Fast and secure mobile recharge and bill payment platform.",
     member: [{ name: "", img: "", linkedin: "", github: "" }]
   },
-
   {
-    id: 0,
-    title: "CRM Mobile App",
-    description: [
-      "Responsible for building the UI, API integration, and business logic.",
-      "Features include creating purchase orders, checking stock quantity, and generating invoices.",
-      "Supports multiple users with different access levels.",
-      "Designed to streamline inventory management and sales operations.",
-      "Enables real-time updates on stock and order statuses.",
-      "Integrates with existing backend systems for seamless data flow.",
-      "Optimized for both Android and iOS platforms using React Native."
-    ],
-    image: "https://img.freepik.com/free-vector/app-development-banner_33099-1720.jpg",
-    imageType: "rectangular",
-    tags: ["React Native", "Redux"],
-    category: "Mobile app",
-    github: "",
-    webapp: "",
-    overview: "A mobile app for managing orders, stock, and invoices.",
-    member: [
-      {
-        name: "",
-        img: "",
-        linkedin: "",
-        github: "",
-      },
-    ],
-  }, {
-    id: 1,
-    title: "Ottraxn",
-    description: [
-      "Responsible for creating the UI and integrating all business logic.",
-      "The app allows users to purchase single or bundle OTT subscriptions.",
-      "Integrated Razorpay payment gateway for seamless transactions.",
-      "Implemented Firebase push notifications for real-time updates.",
-      "Gained strong knowledge in Redux for state management.",
-      "Designed for a smooth user experience in subscription management.",
-      "Supports both individual and bundle subscription purchases."
-    ],
-    image: "https://img.freepik.com/free-vector/app-development-banner_33099-1720.jpg",
-    imageType: "rectangular",
-    tags: ["React Native", "Redux", "Razorpay", "Firebase"],
-    category: "Mobile app",
-    github: "",
-    webapp: "",
-    overview: "An app for purchasing single or bundle OTT subscriptions.",
-    member: [
-      {
-        name: "",
-        img: "",
-        linkedin: "",
-        github: "",
-      },
-    ],
-  }, {
-    id: 2,
-    title: "Doctor Appointment Booking App",
-    description: [
-      "Create user accounts and add patient disease details via audio, video, and images.",
-      "Users can select doctors or disease departments and book available date and time slots.",
-      "Multiple user types are available: Consultants, Doctors, and Tele-callers.",
-      "The app supports multiple languages: Odia, Hindi, Telugu, Tamil, and Bengali.",
-      "Auto-detection of OTP for seamless login and account verification.",
-      "Also developed the iOS version of the app for broader user reach.",
-      "Designed for easy navigation and user-friendly interface for all user types."
-    ],
-    image: "https://img.freepik.com/free-vector/app-development-banner_33099-1720.jpg",
-    imageType: "rectangular",
-    tags: ["React Native", "Redux", "Firebase", "iOS", "Graph QL"],
-    category: "Mobile app",
-    github: "",
-    webapp: "",
-    overview: "A multilingual app for booking doctor appointments and consultations.",
-    member: [
-      {
-        name: "",
-        img: "",
-        linkedin: "",
-        github: "",
-      },
-    ],
-  }, {
-    id: 3,
-    title: "Ecommerce App for Farmers and Distributors",
-    description: [
-      "An app designed to connect farmers and vegetable distributors.",
-      "Farmers can list vegetables with bulk pricing and multiple unit options.",
-      "Includes all standard e-commerce features for seamless transactions.",
-      "Implemented multilingual support to cater to diverse user demographics.",
-      "Added text-to-speech functionality for enhanced accessibility.",
-      "Optimized for user-friendly navigation and ease of use."
-    ],
-    image: "https://img.freepik.com/free-vector/app-development-banner_33099-1720.jpg",
-    imageType: "rectangular",
-    tags: ["React Native", "Text-to-Speech", "Multilingual"],
-    category: "Mobile app",
-    github: "",
-    webapp: "",
-    overview: "An e-commerce app connecting farmers and vegetable distributors.",
-    member: [
-      {
-        name: "",
-        img: "",
-        linkedin: "",
-        github: "",
-      },
-    ],
-  }, {
-    id: 4,
-    title: "Gym Subscription & Inventory Management App",
-    description: [
-      "Designed for managing gym subscriptions and inventory.",
-      "Includes features to track membership plans and inventory items.",
-      "Developed using Flutter for both Android and iOS platforms.",
-      "Integrated Firebase push notifications for real-time updates.",
-      "Optimized for efficient gym operations and inventory tracking."
-    ],
-    image: "https://img.freepik.com/free-vector/app-development-banner_33099-1720.jpg",
-    imageType: "rectangular",
-    tags: ["Flutter", "Firebase", "Cross-Platform"],
-    category: "Mobile app",
-    github: "",
-    webapp: "",
-    overview: "A gym management app for subscriptions and inventory.",
-    member: [
-      {
-        name: "",
-        img: "",
-        linkedin: "",
-        github: "",
-      },
-    ],
-  }, {
-    id: 5,
-    title: "PVC Door Inventory Management App",
-    description: [
-      "Developed an app for managing inventory in a PVC door manufacturing company.",
-      "Led the entire project, handling UI/UX, backend development, and app development.",
-      "Streamlined inventory tracking and management for improved operational efficiency.",
-      "Designed a user-friendly interface for seamless navigation and data access."
-    ],
-    image: "https://img.freepik.com/free-vector/app-development-banner_33099-1720.jpg",
-    imageType: "rectangular",
-    tags: ["Flutter", "Backend Development", "Inventory Management"],
-    category: "Mobile app",
-    github: "",
-    webapp: "",
-    overview: "An inventory app for PVC door manufacturing operations.",
-    member: [
-      {
-        name: "",
-        img: "",
-        linkedin: "",
-        github: "",
-      },
-    ],
-  }, {
-    id: 6,
-    title: "Attenify - Attendance Tracking App",
-    description: [
-      "An app to track attendance using geofencing and WiFi signals.",
-      "Built using Flutter for both Android and iOS platforms.",
-      "Optimized for accurate and efficient attendance tracking.",
-      "Designed for real-time monitoring of attendance data."
-    ],
-    image: "https://img.freepik.com/free-vector/app-development-banner_33099-1720.jpg",
-    imageType: "rectangular",
-    tags: ["Flutter", "Geofencing", "Attendance Tracking"],
-    category: "Mobile app",
-    github: "",
-    webapp: "",
-    overview: "An app to track attendance with geofencing and WiFi.",
-    member: [
-      {
-        name: "",
-        img: "",
-        linkedin: "",
-        github: "",
-      },
-    ],
-  }, {
-    id: 7,
-    title: "Cherry Pay - Recharge and Bill Payment App",
-    description: [
-      "A mobile app for recharges, wallet transfers, DTH, and bill payments.",
-      "Developed using React Native with Reanimated for smooth animations.",
-      "Integrated Paytm payment gateway for secure transactions.",
-      "Optimized for fast and efficient payment processing."
-    ],
-    image: "https://img.freepik.com/free-vector/app-development-banner_33099-1720.jpg",
-    imageType: "rectangular",
-    tags: ["React Native", "Reanimated", "Paytm Payment Gateway"],
-    category: "Mobile app",
-    github: "",
-    webapp: "",
-    overview: "An app for recharges, wallet transfers, and bill payments.",
-    member: [
-      {
-        name: "",
-        img: "",
-        linkedin: "",
-        github: "",
-      },
-    ],
-  }, {
-    id: 8,
-    title: "Emi Locke - Smartphone Financing Control App",
-    description: [
-      "An app designed for smartphone sellers offering self-financing options.",
-      "Allows sellers to control sold devices, including locking and stopping network access, when EMIs are unpaid.",
-      "Managed a team of 4 React Native developers, 1 Native Android developer, and a backend developer.",
-      "Conducted extensive R&D to ensure smooth functionality and robust security.",
-      "Integrated Google Zero Touch Portal and Work Profile for seamless device management.",
-      "Led the project management, ensuring timely delivery and coordination across all teams."
-    ],
-    image: "https://acropolium.com/img/articles/find-backend-developers/img01.jpg",
-    imageType: "rectangular",
-    tags: [
-      "React Native",
-      "Native Android",
-      "Backend Development",
-      "Google Zero Touch",
-      "Team Management"
-    ],
-    category: "backend",
-    github: "",
-    webapp: "",
-    overview: "An app for sellers to control financed smartphones remotely.",
-    member: [
-      {
-        name: "",
-        img: "",
-        linkedin: "",
-        github: "",
-      },
-    ],
-  }, {
-    id: 9,
-    title: "Learning Management System",
-    description: [
-      "A freelance project focused on managing and creating new curriculums.",
-      "Features include curriculum creation, dispatch management, and exam performance tracking.",
-      "Developed the entire application, including the backend.",
-      "Utilized MongoDB, MySQL, Express.js, and React Native for development.",
-      "Designed the system to streamline learning processes and performance analysis."
-    ],
-    image: "https://img.freepik.com/free-vector/hand-drawn-web-developers_23-2148819604.jpg?semt=ais_hybrid",
-    imageType: "rectangular",
-    tags: ["MongoDB", "MySQL", "Express.js", "React Native", "Backend Development"],
-    category: ["Mobile app", "backend"],
-    github: "",
-    webapp: "",
-    overview: "An app for curriculum management and exam performance tracking.",
-    member: [
-      {
-        name: "",
-        img: "",
-        linkedin: "",
-        github: "",
-      },
-    ],
-  }, {
-    id: 10,
-    title: "Event Booking App",
-    description: [
-      "A freelance project designed for booking events seamlessly.",
-      "Built using React Native for the app, with Express.js and MS SQL for the backend.",
-      "Managed the deployment of the backend on AWS for reliable and scalable performance.",
-      "Provided features to browse, book, and manage events effortlessly."
-    ],
-    image: "https://img.freepik.com/free-vector/hand-drawn-web-developers_23-2148819604.jpg?semt=ais_hybrid",
-    imageType: "rectangular",
-    tags: ["React Native", "Express.js", "MS SQL", "AWS", "Backend Deployment"],
-    category: ["Mobile app", "web app", "backend"],
-    github: "",
-    webapp: "",
-    overview: "An app for seamless event booking and management.",
-    member: [
-      {
-        name: "",
-        img: "",
-        linkedin: "",
-        github: "",
-      },
-    ],
-  }, {
-    id: 11,
-    title: "Teacher-Student Connection App",
-    description: [
-      "A freelance project to connect teachers and students seamlessly.",
-      "Developed the frontend using React Native for a user-friendly interface.",
-      "Used Firebase for backend services, ensuring real-time data synchronization.",
-      "The app facilitates efficient communication and collaboration between teachers and students."
-    ],
-    image: "https://img.freepik.com/free-vector/hand-drawn-web-developers_23-2148819604.jpg?semt=ais_hybrid",
-    imageType: "rectangular",
-    tags: ["React Native", "Firebase", "Real-Time Communication"],
-    category: ["Mobile app", "web app", "backend"],
-    github: "",
-    webapp: "",
-    overview: "An app to connect teachers and students efficiently.",
-    member: [
-      {
-        name: "",
-        img: "",
-        linkedin: "",
-        github: "",
-      },
-    ],
-  }, {
-    id: 12,
-    title: "IoT Device Connection App",
-    description: [
-      "An app designed to connect IoT devices with a mobile app and web portal.",
-      "Used Express.js to develop the backend and configured the MQTT protocol over AWS.",
-      "Implemented WebSocket for real-time data fetching from sensors to the app.",
-      "Provides a seamless way to monitor and control IoT sensors through a user-friendly interface."
-    ],
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLtMS8qiUFvwKVi8C4JrdWm9dOwiZvnwynzA&s",
-    imageType: "rectangular",
-    tags: ["Express.js", "MQTT", "AWS", "WebSocket", "IoT Integration"],
-    category: "backend",
-    github: "",
-    webapp: "",
-    overview: "An app for real-time IoT sensor monitoring and control.",
-    member: [
-      {
-        name: "",
-        img: "",
-        linkedin: "",
-        github: "",
-      },
-    ],
-  }, {
-    id: 13,
-    title: "IoT Device Sensor & Live Camera App",
-    description: [
-      "An app designed for IoT devices to fetch and manage sensor values.",
-      "Developed and managed both backend and application parts of the project.",
-      "Created algorithms to process and manage sensor data efficiently.",
-      "Integrated live camera feed functionality for real-time monitoring.",
-      "Deployed the app on the Play Store and managed backend deployment on AWS."
-    ],
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLtMS8qiUFvwKVi8C4JrdWm9dOwiZvnwynzA&s",
-    imageType: "rectangular",
-    tags: ["IoT", "AWS", "Play Store", "Sensor Data", "Live Camera"],
-    category: "backend",
-    github: "",
-    webapp: "",
-    overview: "An app for IoT sensor data and live camera monitoring.",
-    member: [
-      {
-        name: "",
-        img: "",
-        linkedin: "",
-        github: "",
-      },
-    ],
-  }, {
     id: 14,
-    title: "Informative Web App",
+    title: "Personal Portfolio Website",
     description: [
-      "A web application built using Next.js to provide information effectively.",
-      "Implemented a responsive and visually appealing design using Tailwind CSS.",
-      "Focused on delivering a seamless user experience with optimized performance.",
-      "The site serves as an informative platform for users, offering structured and easy-to-access content."
+      "Modern, responsive portfolio website built using Next.js and Tailwind CSS.",
+      "Features iterative design improvements and performance optimizations.",
+      "Showcases projects, experiences, and technical skills with smooth animations.",
+      "Optimized for SEO and cross-device compatibility."
     ],
     image: "https://media.istockphoto.com/id/1371339413/photo/co-working-team-meeting-concept-businessman-using-smart-phone-and-digital-tablet-and-laptop.jpg?s=612x612&w=0&k=20&c=ysEsVw3q2axYt3oVZAuQjtHRlN3lY-U_e0ikK5yKIXQ=",
     imageType: "rectangular",
-    tags: ["Next.js", "Tailwind CSS", "Web Development"],
-    category: "web app",
-    github: "",
-    webapp: "",
-    overview: "A Next.js web app for delivering structured information.",
-    member: [
-      {
-        name: "",
-        img: "",
-        linkedin: "",
-        github: "",
-      },
-    ],
+    tags: ["Next.js", "Tailwind CSS", "Portfolio", "Web Development"],
+    category: "Web app",
+    github: "https://github.com/amareshpati/portfolio-web",
+    webapp: "https://devvloper.in",
+    overview: "My personal professional portfolio built with Next.js.",
+    member: [{ name: "", img: "", linkedin: "", github: "" }]
   },
-
-
 ];
 
 export const testimonials = [

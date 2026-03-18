@@ -238,7 +238,7 @@ const Projects = () => {
   const pinnedProjects = applyFilters(projects.filter((p) => p.pinned));
   const recentProjects = applyFilters(projects.filter((p) => !p.pinned));
 
-  const visiblePinned = showAll ? pinnedProjects : pinnedProjects.slice(0, 3);
+  const visiblePinned = showAll ? pinnedProjects : pinnedProjects.slice(0, 4);
   const visibleRecent = showAll ? recentProjects : recentProjects.slice(0, Math.max(0, 8 - visiblePinned.length));
 
   const totalFiltered = pinnedProjects.length + recentProjects.length;
