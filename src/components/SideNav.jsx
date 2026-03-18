@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import styled, { keyframes } from "styled-components";
 import { useThemeToggle } from "../utils/ThemeContext";
 import {
