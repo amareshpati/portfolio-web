@@ -14,7 +14,7 @@ A premium, high-performance portfolio website built with **React**, **Three.js**
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: React.js, Next.js (optional parts)
+- **Frontend**: React.js, 
 - **Styling**: Styled Components, Material UI (MUI)
 - **3D Graphics**: Three.js, React Three Fiber, React Three Drei
 - **Animations**: Framer Motion, React Tilt, Typewriter Effect
